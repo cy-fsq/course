@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python基础 - 郑利娜老师个人页面</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a56db',
+                        secondary: '#f3f4f6',
+                        dark: '#374151',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="text-primary font-bold text-xl">郑利娜 - 个人页面</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="../index.html#about" class="text-dark hover:text-primary transition-colors">关于我</a>
+                <a href="../index.html#courses" class="text-dark hover:text-primary transition-colors">课程信息</a>
+                <a href="../index.html#contact" class="text-dark hover:text-primary transition-colors">联系方式</a>
+            </div>
+            <button class="md:hidden text-dark">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 课程标题 -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-start justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-dark mb-2">Python基础</h1>
+                    <p class="text-gray-600">高职大二第一学期</p>
+                </div>
+                <a href="../index.html#courses" class="mt-4 md:mt-0 bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回课程列表
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 课程概述 -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-dark mb-6">课程概述</h2>
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <p class="text-gray-700 mb-4">
+                    《Python基础》是商务数据分析与应用专业的基础课程，面向高职大二第一学期学生开设。本课程旨在帮助学生掌握Python编程语言的基础知识，为后续的数据分析课程打下坚实的编程基础。
+                </p>
+                <p class="text-gray-700">
+                    课程内容包括Python的基本语法、数据类型、控制结构、函数、模块等基础知识，以及文件操作、异常处理等实用技能。通过本课程的学习，学生将能够编写简单的Python程序，处理基本的数据操作任务。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 学习目标 -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-dark mb-6">学习目标</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-secondary rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-check text-primary"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-dark">知识目标</h3>
+                    </div>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                            <span>掌握Python的基本语法和数据类型</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                            <span>理解控制结构和函数的使用方法</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                            <span>熟悉Python模块和包的概念</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                            <span>了解文件操作和异常处理的基本方法</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-secondary rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-bolt text-primary"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-dark">能力目标</h3>
+                    </div>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                            <span>能够编写简单的Python程序</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                            <span>能够使用Python处理基本的数据操作</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                            <span>能够使用Python模块扩展功能</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                            <span>能够调试和优化Python代码</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 课程大纲 -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-dark mb-6">课程大纲</h2>
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="space-y-6">
+                    <!-- 第1周 -->
+                    <div class="border-b border-gray-200 pb-4">
+                        <h3 class="text-lg font-semibold text-dark mb-2">第1周：Python简介与环境搭建</h3>
+                        <ul class="space-y-1 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>Python的历史与特点</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>Python的应用领域</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>Python环境搭建</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>第一个Python程序</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 第2周 -->
+                    <div class="border-b border-gray-200 pb-4">
+                        <h3 class="text-lg font-semibold text-dark mb-2">第2周：基本数据类型与运算符</h3>
+                        <ul class="space-y-1 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>数字类型（整数、浮点数）</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>字符串类型</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>布尔类型</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>基本运算符</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 第3周 -->
+                    <div class="border-b border-gray-200 pb-4">
+                        <h3 class="text-lg font-semibold text-dark mb-2">第3周：控制结构</h3>
+                        <ul class="space-y-1 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>if语句</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>elif和else语句</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>for循环</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>while循环</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 第4周 -->
+                    <div class="border-b border-gray-200 pb-4">
+                        <h3 class="text-lg font-semibold text-dark mb-2">第4周：序列类型</h3>
+                        <ul class="space-y-1 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>列表（List）</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>元组（Tuple）</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>序列操作</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>序列方法</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 第5周 -->
+                    <div class="border-b border-gray-200 pb-4">
+                        <h3 class="text-lg font-semibold text-dark mb-2">第5周：字典与集合</h3>
+                        <ul class="space-y-1 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>字典（Dictionary）</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>集合（Set）</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>字典和集合的操作</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 第6周 -->
+                    <div class="border-b border-gray-200 pb-4">
+                        <h3 class="text-lg font-semibold text-dark mb-2">第6周：函数</h3>
+                        <ul class="space-y-1 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>函数定义与调用</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>参数传递</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>返回值</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>局部变量与全局变量</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 第7周 -->
+                    <div class="border-b border-gray-200 pb-4">
+                        <h3 class="text-lg font-semibold text-dark mb-2">第7周：模块与包</h3>
+                        <ul class="space-y-1 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>模块的导入与使用</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>标准库的使用</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>包的概念与使用</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 第8周 -->
+                    <div class="border-b border-gray-200 pb-4">
+                        <h3 class="text-lg font-semibold text-dark mb-2">第8周：文件操作</h3>
+                        <ul class="space-y-1 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>文件的打开与关闭</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>文件的读取与写入</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>文件指针操作</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>上下文管理器（with语句）</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 第9周 -->
+                    <div class="border-b border-gray-200 pb-4">
+                        <h3 class="text-lg font-semibold text-dark mb-2">第9周：异常处理</h3>
+                        <ul class="space-y-1 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>异常的概念</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>try-except语句</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>else和finally子句</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>自定义异常</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 第10-12周 -->
+                    <div class="border-b border-gray-200 pb-4">
+                        <h3 class="text-lg font-semibold text-dark mb-2">第10-12周：Python编程实践</h3>
+                        <ul class="space-y-1 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>数据处理实践</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>简单的数据分析案例</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>小型项目开发</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 第13-15周 -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-dark mb-2">第13-15周：课程总结与考核</h3>
+                        <ul class="space-y-1 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>课程内容总结</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>Python进阶学习资源</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>课程考核</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 评估方式 -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-dark mb-6">评估方式</h2>
+            <div class="bg-secondary rounded-xl p-6">
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-file-text text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-dark">平时成绩 (40%)</h3>
+                            <p class="text-gray-600">包括课堂参与、作业完成情况、实验报告等</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-laptop text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-dark">实验项目 (30%)</h3>
+                            <p class="text-gray-600">Python编程实验和小型项目</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-graduation-cap text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-dark">期末考核 (30%)</h3>
+                            <p class="text-gray-600">Python编程综合测试</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 参考资料 -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-dark mb-6">参考资料</h2>
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <h3 class="text-lg font-semibold text-dark mb-4">推荐教材</h3>
+                <ul class="space-y-2 text-gray-700">
+                    <li class="flex items-start">
+                        <i class="fa fa-book text-primary mt-1 mr-2"></i>
+                        <span>《Python编程：从入门到实践》，Eric Matthes，人民邮电出版社</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa fa-book text-primary mt-1 mr-2"></i>
+                        <span>《Python基础教程》，Magnus Lie Hetland，人民邮电出版社</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa fa-book text-primary mt-1 mr-2"></i>
+                        <span>《Python编程基础与实践》，Allen B. Downey，机械工业出版社</span>
+                    </li>
+                </ul>
+                
+                <h3 class="text-lg font-semibold text-dark mt-6 mb-4">参考网站</h3>
+                <ul class="space-y-2 text-gray-700">
+                    <li class="flex items-start">
+                        <i class="fa fa-link text-primary mt-1 mr-2"></i>
+                        <span><a href="https://docs.python.org/3/" class="text-primary hover:underline">Python官方文档</a></span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa fa-link text-primary mt-1 mr-2"></i>
+                        <span><a href="https://www.python.org/" class="text-primary hover:underline">Python官方网站</a></span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa fa-link text-primary mt-1 mr-2"></i>
+                        <span><a href="https://www.runoob.com/python/python-tutorial.html" class="text-primary hover:underline">菜鸟教程 - Python</a></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-dark mb-6">联系方式</h2>
+            <div class="max-w-2xl mx-auto bg-secondary rounded-xl p-8">
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-envelope text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-medium text-dark">邮箱</h3>
+                            <p class="text-gray-600">lina.zheng@gdpt.edu.cn</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-phone text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-medium text-dark">电话</h3>
+                            <p class="text-gray-600">0756-1234567</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-map-marker text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-medium text-dark">地址</h3>
+                            <p class="text-gray-600">广东省珠海市金湾区广东科学技术职业学院</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2026 郑利娜 - 广东科学技术职业学院</p>
+            <p class="mt-2 text-gray-400">商务数据分析与应用专业</p>
+        </div>
+    </footer>
+
+    <script>
+        // 简单的响应式导航
+        document.querySelector('.md\:hidden button').addEventListener('click', function() {
+            const navLinks = document.querySelector('.md\:flex');
+            navLinks.classList.toggle('hidden');
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
