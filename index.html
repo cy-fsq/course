@@ -205,10 +205,15 @@
 
     <script>
         // 简单的响应式导航
-        document.querySelector('.md\:hidden button').addEventListener('click', function() {
-            const navLinks = document.querySelector('.md\:flex');
-            navLinks.classList.toggle('hidden');
-        });
+        const menuButton = document.querySelector('nav button');
+        if (menuButton) {
+            menuButton.addEventListener('click', function() {
+                const navLinks = document.querySelector('nav .md\\:flex');
+                if (navLinks) {
+                    navLinks.classList.toggle('hidden');
+                }
+            });
+        }
 
         // 平滑滚动
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

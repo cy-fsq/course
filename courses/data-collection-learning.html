@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据采集与处理在线学习 - 郑利娜老师</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8b5cf6',
+                        secondary: '#f1f5f9',
+                    },
+                },
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+        .knowledge-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 4px solid #8b5cf6;
+        }
+        .code-block {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 12px 0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+        .code-keyword { color: #c678dd; }
+        .code-string { color: #98c379; }
+        .code-number { color: #d19a66; }
+        .code-function { color: #61afef; }
+        .code-comment { color: #5c6370; }
+        .output-box {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 100px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 顶部导航 -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <i class="fa fa-arrow-left text-primary text-xl"></i>
+                <span class="text-gray-600">返回主页</span>
+            </a>
+            <h1 class="text-xl font-bold text-gray-800">数据采集与处理</h1>
+            <div class="text-primary font-medium">在线学习</div>
+        </div>
+    </nav>
+
+    <!-- Hero区域 -->
+    <section class="gradient-bg text-white py-16">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-4">🕷️ 数据采集与处理在线学习</h1>
+            <p class="text-xl opacity-90 mb-8">7个核心知识点 · 正则表达式与文件处理 · 边学边练</p>
+            <div class="flex justify-center space-x-6 text-sm">
+                <div class="flex items-center">
+                    <i class="fa fa-code mr-2"></i>
+                    <span>在线运行代码</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fa fa-clock-o mr-2"></i>
+                    <span>约90分钟</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fa fa-star mr-2"></i>
+                    <span>7个核心知识点</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 课程内容 -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <!-- 知识模块选择 -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">📚 选择学习模块</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <button onclick="showModule(1)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">🔤</div>
+                    <div class="font-semibold text-gray-800">第1节</div>
+                    <div class="text-sm text-gray-500">正则表达式基础</div>
+                </button>
+                <button onclick="showModule(2)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">📧</div>
+                    <div class="font-semibold text-gray-800">第2节</div>
+                    <div class="text-sm text-gray-500">匹配与提取</div>
+                </button>
+                <button onclick="showModule(3)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">📄</div>
+                    <div class="font-semibold text-gray-800">第3节</div>
+                    <div class="text-sm text-gray-500">CSV文件处理</div>
+                </button>
+                <button onclick="showModule(4)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">📋</div>
+                    <div class="font-semibold text-gray-800">第4节</div>
+                    <div class="text-sm text-gray-500">JSON数据处理</div>
+                </button>
+                <button onclick="showModule(5)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">🧹</div>
+                    <div class="font-semibold text-gray-800">第5节</div>
+                    <div class="text-sm text-gray-500">数据清洗基础</div>
+                </button>
+                <button onclick="showModule(6)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">🔄</div>
+                    <div class="font-semibold text-gray-800">第6节</div>
+                    <div class="text-sm text-gray-500">数据转换</div>
+                </button>
+                <button onclick="showModule(7)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">📊</div>
+                    <div class="font-semibold text-gray-800">第7节</div>
+                    <div class="text-sm text-gray-500">数据验证与汇总</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- 第1节：正则表达式基础 -->
+        <div id="module-1" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">1</span>
+                    正则表达式基础
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        正则表达式是用来匹配字符串模式的工具，可以快速实现复杂的字符串查找、验证和替换操作。
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-3 mb-4">
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-1">\d</div>
+                            <code class="text-blue-600 text-sm">匹配任意数字</code>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-1">\w</div>
+                            <code class="text-green-600 text-sm">匹配字母、数字、下划线</code>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg">
+                            <div class="font-semibold text-purple-800 mb-1">\s</div>
+                            <code class="text-purple-600 text-sm">匹配空白字符</code>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg">
+                            <div class="font-semibold text-orange-800 mb-1">.</div>
+                            <code class="text-orange-600 text-sm">匹配任意字符</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 简单的正则表达式模拟</span>
+<span class="code-keyword">def</span> <span class="code-function">match_pattern</span>(pattern, text):
+    <span class="code-string">"""模拟正则匹配"""</span>
+    <span class="code-keyword">if</span> pattern == <span class="code-string">r'\d+'</span>:
+        <span class="code-keyword">return</span> <span class="code-function">''.join</span>([c <span class="code-keyword">for</span> c <span class="code-keyword">in</span> text <span class="code-keyword">if</span> c.<span class="code-function">isdigit</span>()])
+    <span class="code-keyword">elif</span> pattern == <span class="code-string">r'\w+'</span>:
+        <span class="code-keyword">return</span> <span class="code-function">''.join</span>([c <span class="code-keyword">for</span> c <span class="code-keyword">in</span> text <span class="code-keyword">if</span> c.isalnum() <span class="code-keyword">or</span> c == <span class="code-string">'_'</span>])
+    <span class="code-keyword">return</span> <span class="code-string">""</span>
+
+<span class="code-comment"># 测试匹配</span>
+text = <span class="code-string">"张三的电话是13812345678"</span>
+<span class="code-function">print</span>(<span class="code-string">f"原文：{text}"</span>)
+numbers = <span class="code-function">match_pattern</span>(<span class="code-string">r'\d+'</span>, text)
+<span class="code-function">print</span>(<span class="code-string">f"提取数字：{numbers}"</span>)
+
+text2 = <span class="code-string">"Hello_World123"</span>
+words = <span class="code-function">match_pattern</span>(<span class="code-string">r'\w+'</span>, text2)
+<span class="code-function">print</span>(<span class="code-string">f"提取单词：{words}"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第2节：匹配与提取 -->
+        <div id="module-2" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">2</span>
+                    匹配与提取
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        常用的正则操作包括：查找所有匹配(findall)、替换(sub)、分割(split)等。
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-3 mb-4">
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-1">findall</div>
+                            <code class="text-blue-600 text-sm">查找所有匹配</code>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-1">sub</div>
+                            <code class="text-green-600 text-sm">替换匹配内容</code>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg">
+                            <div class="font-semibold text-purple-800 mb-1">split</div>
+                            <code class="text-purple-600 text-sm">按匹配分割</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 模拟正则提取操作</span>
+<span class="code-keyword">def</span> <span class="code-function">extract_emails</span>(text):
+    <span class="code-string">"""提取邮箱地址"""</span>
+    <span class="code-variable">result</span> = []
+    <span class="code-variable">i</span> = <span class="code-number">0</span>
+    <span class="code-keyword">while</span> i < <span class="code-function">len</span>(text):
+        <span class="code-keyword">if</span> text[i] == <span class="code-string">'@'</span>:
+            <span class="code-comment"># 向前找用户名</span>
+            start = i
+            <span class="code-keyword">while</span> start > <span class="code-number">0</span> <span class="code-keyword">and</span> (text[start-<span class="code-number">1</span>].isalnum() <span class="code-keyword">or</span> text[start-<span class="code-number">1</span>] == <span class="code-string">'_'</span> <span class="code-keyword">or</span> text[start-<span class="code-number">1</span>] == <span class="code-string">'.'</span>):
+                start -= <span class="code-number">1</span>
+            <span class="code-comment"># 向后找域名</span>
+            end = i
+            <span class="code-keyword">while</span> end < <span class="code-function">len</span>(text) <span class="code-keyword">and</span> (text[end].isalnum() <span class="code-keyword">or</span> text[end] == <span class="code-string">'@'</span> <span class="code-keyword">or</span> text[end] == <span class="code-string">'.'</span> <span class="code-keyword">or</span> text[end] == <span class="code-string">'_'</span>):
+                end += <span class="code-number">1</span>
+            email = text[start:end]
+            <span class="code-keyword">if</span> <span class="code-string">'@'</span> <span class="code-keyword">in</span> email <span class="code-keyword">and</span> email.<span class="code-function">count</span>(<span class="code-string">'@'</span>) == <span class="code-number">1</span>:
+                result.<span class="code-function">append</span>(email)
+            i = end
+        <span class="code-keyword">else</span>:
+            i += <span class="code-number">1</span>
+    <span class="code-keyword">return</span> result
+
+<span class="code-comment"># 测试提取</span>
+text = <span class="code-string">"联系邮箱：test@example.com 或 admin@test.org"</span>
+<span class="code-function">print</span>(<span class="code-string">f"原文：{text}"</span>)
+emails = <span class="code-function">extract_emails</span>(text)
+<span class="code-function">print</span>(<span class="code-string">f"提取的邮箱：{emails}"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第3节：CSV文件处理 -->
+        <div id="module-3" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">3</span>
+                    CSV文件处理
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        CSV(Comma-Separated Values)是常用的数据交换格式，每行一条记录，字段用逗号分隔。
+                    </p>
+                    <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                        <div class="font-semibold text-blue-800 mb-2">CSV格式示例</div>
+                        <code class="text-blue-600 text-sm">姓名,年龄,城市<br>张三,25,北京<br>李四,30,上海</code>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 模拟CSV数据解析</span>
+<span class="code-keyword">def</span> <span class="code-function">parse_csv</span>(csv_text):
+    <span class="code-string">"""解析CSV文本"""</span>
+    lines = csv_text.<span class="code-function">strip</span>().<span class="code-function">split</span>(<span class="code-string">'\n'</span>)
+    headers = lines[<span class="code-number">0</span>].<span class="code-function">split</span>(<span class="code-string">','</span>)
+    data = []
+    <span class="code-keyword">for</span> line <span class="code-keyword">in</span> lines[<span class="code-number">1</span>:]:
+        values = line.<span class="code-function">split</span>(<span class="code-string">','</span>)
+        <span class="code-keyword">if</span> <span class="code-function">len</span>(values) == <span class="code-function">len</span>(headers):
+            data.<span class="code-function">append</span>(<span class="code-function">dict</span>(<span class="code-function">zip</span>(headers, values)))
+    <span class="code-keyword">return</span> data
+
+<span class="code-comment"># 模拟CSV数据</span>
+csv_data = <span class="code-string">"""姓名,年龄,城市
+张三,25,北京
+李四,30,上海
+王五,28,广州
+赵六,22,深圳"""</span>
+
+<span class="code-function">print</span>(<span class="code-string">"CSV数据解析结果："</span>)
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">40</span>)
+records = <span class="code-function">parse_csv</span>(csv_data)
+<span class="code-keyword">for</span> record <span class="code-keyword">in</span> records:
+    <span class="code-function">print</span>(<span class="code-string">f"  {record['姓名']}: {record['年龄']}岁, 来自{record['城市']}"</span>)
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">40</span>)
+<span class="code-function">print</span>(<span class="code-string">f"共 {len(records)} 条记录"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第4节：JSON数据处理 -->
+        <div id="module-4" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">4</span>
+                    JSON数据处理
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        JSON(JavaScript Object Notation)是轻量级的数据交换格式，易于人阅读和编写，也易于机器解析和生成。
+                    </p>
+                    <div class="bg-green-50 p-4 rounded-lg mb-4">
+                        <div class="font-semibold text-green-800 mb-2">JSON结构</div>
+                        <code class="text-green-600 text-sm">{"键": "值", "数组": [], "对象": {}}</code>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 模拟JSON解析</span>
+<span class="code-keyword">def</span> <span class="code-function">parse_json</span>(json_str):
+    <span class="code-string">"""简化版JSON解析"""</span>
+    <span class="code-keyword">return</span> <span class="code-function">eval</span>(json_str)
+
+<span class="code-comment"># 模拟JSON数据</span>
+json_data = <span class="code-string">"""{
+    "姓名": "张三",
+    "年龄": 25,
+    "技能": ["Python", "数据分析", "机器学习"],
+    "项目": {
+        "名称": "销售分析系统",
+        "周期": "3个月"
+    }
+}"""</span>
+
+<span class="code-function">print</span>(<span class="code-string">"JSON数据解析结果："</span>)
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">40</span>)
+data = <span class="code-function">parse_json</span>(json_data)
+<span class="code-function">print</span>(<span class="code-string">f"姓名：{data['姓名']}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"年龄：{data['年龄']}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"技能：{', '.join(data['技能'])}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"项目：{data['项目']['名称']}"</span>)
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">40</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第5节：数据清洗基础 -->
+        <div id="module-5" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">5</span>
+                    数据清洗基础
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        数据清洗是数据分析的关键步骤，主要处理缺失值、重复值、格式不一致等问题。
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-3 mb-4">
+                        <div class="bg-red-50 p-3 rounded-lg">
+                            <div class="font-semibold text-red-800 mb-1">缺失值</div>
+                            <code class="text-red-600 text-sm">删除或填充</code>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg">
+                            <div class="font-semibold text-orange-800 mb-1">重复值</div>
+                            <code class="text-orange-600 text-sm">去重处理</code>
+                        </div>
+                        <div class="bg-yellow-50 p-3 rounded-lg">
+                            <div class="font-semibold text-yellow-800 mb-1">格式问题</div>
+                            <code class="text-yellow-600 text-sm">统一格式化</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 数据清洗示例</span>
+<span class="code-variable">raw_data</span> = [<span class="code-number">85</span>, <span class="code-keyword">None</span>, <span class="code-number">78</span>, <span class="code-number">92</span>, <span class="code-number">78</span>, <span class="code-keyword">None</span>, <span class="code-number">88</span>]
+
+<span class="code-function">print</span>(<span class="code-string">"数据清洗示例："</span>)
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">40</span>)
+<span class="code-function">print</span>(<span class="code-string">f"原始数据：{raw_data}"</span>)
+
+<span class="code-comment"># 1. 统计缺失值</span>
+<span class="code-variable">null_count</span> = raw_data.<span class="code-function">count</span>(<span class="code-keyword">None</span>)
+<span class="code-function">print</span>(<span class="code-string">f"缺失值数量：{null_count}"</span>)
+
+<span class="code-comment"># 2. 用平均值填充缺失值</span>
+<span class="code-variable">valid_nums</span> = [x <span class="code-keyword">for</span> x <span class="code-variable">raw_data</span> <span class="code-keyword">if</span> x <span class="code-keyword">is not None</span>]
+<span class="code-variable">avg</span> = <span class="code-function">sum</span>(valid_nums) / <span class="code-function">len</span>(valid_nums)
+<span class="code-variable">filled_data</span> = [avg <span class="code-keyword">if</span> x <span class="code-keyword">is None</span> <span class="code-keyword">else</span> x <span class="code-keyword">for</span> x <span class="code-variable">raw_data</span>]
+<span class="code-function">print</span>(<span class="code-string">f"填充后数据：{[round(x, 1) for x in filled_data]}"</span>)
+
+<span class="code-comment"># 3. 去重</span>
+<span class="code-variable">unique_data</span> = <span class="code-function">list</span>(<span class="code-function">dict.fromkeys</span>(filled_data))
+<span class="code-function">print</span>(<span class="code-string">f"去重后数据：{[round(x, 1) for x in unique_data]}"</span>)
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">40</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第6节：数据转换 -->
+        <div id="module-6" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">6</span>
+                    数据转换
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        数据转换包括数据类型转换、数据归一化、数据聚合等操作，使数据适合分析需求。
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-3 mb-4">
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-1">类型转换</div>
+                            <code class="text-blue-600 text-sm">str → int, str → float</code>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-1">数据归一化</div>
+                            <code class="text-green-600 text-sm">0-1 标准化</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 数据转换示例</span>
+<span class="code-comment"># 原始数据（字符串）</span>
+<span class="code-variable">raw_numbers</span> = [<span class="code-string">"85"</span>, <span class="code-string">"92"</span>, <span class="code-string">"78"</span>, <span class="code-string">"95"</span>, <span class="code-string">"88"</span>]
+
+<span class="code-function">print</span>(<span class="code-string">"数据转换示例："</span>)
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">40</span>)
+<span class="code-function">print</span>(<span class="code-string">f"原始数据（字符串）：{raw_numbers}"</span>)
+
+<span class="code-comment"># 1. 类型转换：str → int</span>
+<span class="code-variable">numbers</span> = [<span class="code-function">int</span>(x) <span class="code-keyword">for</span> x <span class="code-variable">raw_numbers</span>]
+<span class="code-function">print</span>(<span class="code-string">f"转换为整数：{numbers}"</span>)
+
+<span class="code-comment"># 2. 归一化处理（0-1范围）</span>
+<span class="code-variable">min_val</span> = <span class="code-function">min</span>(numbers)
+<span class="code-variable">max_val</span> = <span class="code-function">max</span>(numbers)
+<span class="code-variable">normalized</span> = [(x - min_val) / (max_val - min_val) <span class="code-keyword">for</span> x <span class="code-variable">numbers</span>]
+<span class="code-function">print</span>(<span class="code-string">f"归一化后：{[round(x, 2) for x in normalized]}"</span>)
+
+<span class="code-comment"># 3. 数据分组</span>
+<span class="code-variable">grade_map</span> = <span class="code-keyword">lambda</span> x: <span class="code-string">"A"</span> <span class="code-keyword">if</span> x >= <span class="code-number">90</span> <span class="code-keyword">else</span> (<span class="code-string">"B"</span> <span class="code-keyword">if</span> x >= <span class="code-number">80</span> <span class="code-keyword">else</span> <span class="code-string">"C"</span>)
+<span class="code-variable">grades</span> = [grade_map(x) <span class="code-keyword">for</span> x <span class="code-variable">numbers</span>]
+<span class="code-function">print</span>(<span class="code-string">f"成绩等级：{grades}"</span>)
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">40</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第7节：数据验证与汇总 -->
+        <div id="module-7" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">7</span>
+                    数据验证与汇总
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        数据验证确保数据质量，汇总统计则提供数据的整体视图，两者都是数据分析的重要环节。
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-3 mb-4">
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-1">数据验证</div>
+                            <code class="text-blue-600 text-sm">范围检查、格式验证</code>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-1">数据汇总</div>
+                            <code class="text-green-600 text-sm">统计量、聚合分析</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 数据验证与汇总示例</span>
+<span class="code-variable">sales_data</span> = [
+    {<span class="code-string">"日期"</span>: <span class="code-string">"2024-01"</span>, <span class="code-string">"销售额"</span>: <span class="code-number">12000</span>, <span class="code-string">"产品"</span>: <span class="code-string">"A"</span>},
+    {<span class="code-string">"日期"</span>: <span class="code-string">"2024-01"</span>, <span class="code-string">"销售额"</span>: <span class="code-number">15000</span>, <span class="code-string">"产品"</span>: <span class="code-string">"B"</span>},
+    {<span class="code-string">"日期"</span>: <span class="code-string">"2024-02"</span>, <span class="code-string">"销售额"</span>: <span class="code-number">18000</span>, <span class="code-string">"产品"</span>: <span class="code-string">"A"</span>},
+    {<span class="code-string">"日期"</span>: <span class="code-string">"2024-02"</span>, <span class="code-string">"销售额"</span>: <span class="code-number">14000</span>, <span class="code-string">"产品"</span>: <span class="code-string">"B"</span>},
+]
+
+<span class="code-function">print</span>(<span class="code-string">"销售数据分析："</span>)
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">40</span>)
+
+<span class="code-comment"># 1. 数据验证</span>
+<span class="code-function">print</span>(<span class="code-string">"数据验证："</span>)
+<span class="code-keyword">for</span> record <span class="code-keyword">in</span> sales_data:
+    valid = <span class="code-keyword">True</span>
+    <span class="code-keyword">if</span> record[<span class="code-string">"销售额"</span>] < <span class="code-number">0</span>:
+        valid = <span class="code-keyword">False</span>
+    <span class="code-keyword">if</span> <span class="code-keyword">not</span> record[<span class="code-string">"日期"</span>]:
+        valid = <span class="code-keyword">False</span>
+    <span class="code-function">print</span>(<span class="code-string">f"  {record['日期']} {record['产品']}: {'✓ 有效' if valid else '✗ 无效'}"</span>)
+
+<span class="code-comment"># 2. 按月份汇总</span>
+<span class="code-function">print</span>(<span class="code-string">"\n按月份汇总："</span>)
+<span class="code-variable">monthly</span> = {}
+<span class="code-keyword">for</span> r <span class="code-keyword">in</span> sales_data:
+    month = r[<span class="code-string">"日期"</span>]
+    monthly[month] = monthly.<span class="code-function">get</span>(month, <span class="code-number">0</span>) + r[<span class="code-string">"销售额"</span>]
+<span class="code-keyword">for</span> month, total <span class="code-keyword">in</span> monthly.<span class="code-function">items</span>():
+    <span class="code-function">print</span>(<span class="code-string">f"  {month}: ¥{total:,}"</span>)
+
+<span class="code-comment"># 3. 总体统计</span>
+<span class="code-variable">total_sales</span> = <span class="code-function">sum</span>(r[<span class="code-string">"销售额"</span>] <span class="code-keyword">for</span> r <span class="code-keyword">in</span> sales_data)
+<span class="code-variable">avg_sales</span> = total_sales / <span class="code-function">len</span>(sales_data)
+<span class="code-function">print</span>(<span class="code-string">f"\n总体统计："</span>)
+<span class="code-function">print</span>(<span class="code-string">f"  总销售额：¥{total_sales:,}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"  平均单笔：¥{avg_sales:,.0f}"</span>)
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">40</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 综合代码编辑器 -->
+        <div class="mt-12 bg-white rounded-2xl shadow-xl p-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+                    <span class="text-3xl mr-3">🚀</span>
+                    综合代码编辑器
+                </h2>
+                <button onclick="runAllCode()" class="bg-gradient-to-r from-primary to-violet-600 text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity flex items-center">
+                    <i class="fa fa-play mr-2"></i>
+                    运行全部代码
+                </button>
+            </div>
+            
+            <p class="text-gray-600 mb-4">
+                将上面示例中的代码复制到下方编辑器中，点击"运行全部代码"查看结果：
+            </p>
+            
+            <div class="mb-4">
+                <div id="main-editor" class="rounded-lg overflow-hidden border-2 border-gray-200" style="height: 400px;"></div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold text-gray-700 mb-3 flex items-center">
+                    <span class="mr-2">📤</span> 运行结果
+                </h3>
+                <div id="output-area" class="output-box">
+                    <p class="text-gray-400 text-center">点击"运行全部代码"按钮查看输出结果</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-gray-400">© 2026 郑利娜 - 广东科学技术职业学院 · 商务数据分析与应用专业</p>
+        </div>
+    </footer>
+
+    <script>
+        // 初始化主编辑器
+        const editor = ace.edit("main-editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/python");
+        editor.setFontSize(14);
+        editor.setShowPrintMargin(false);
+
+        // 默认代码
+        editor.setValue(`# 数据采集与处理 - 综合练习
+# 在下方编写你的代码，点击"运行全部代码"执行
+
+# 示例：正则表达式提取
+text = "张三的电话是13812345678"
+numbers = ''.join([c for c in text if c.isdigit()])
+print(f"提取的电话号码：{numbers}")
+
+# 示例：CSV数据解析
+csv_data = "姓名,年龄\\n张三,25\\n李四,30"
+print("\\nCSV数据：")
+for line in csv_data.split('\\\\n'):
+    print(f"  {line}")
+
+# 示例：数据清洗
+raw_data = [85, None, 78, 92, None]
+valid = [x for x in raw_data if x is not None]
+avg = sum(valid) / len(valid)
+cleaned = [avg if x is None else x for x in raw_data]
+print(f"\\n清洗后数据：{cleaned}")
+`, -1);
+
+        // 显示指定模块
+        function showModule(num) {
+            document.querySelectorAll('.module-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            const module = document.getElementById(`module-${num}`);
+            if (module) {
+                module.classList.remove('hidden');
+                module.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // 运行代码
+        function runAllCode() {
+            const code = editor.getValue();
+            const outputArea = document.getElementById('output-area');
+            
+            outputArea.innerHTML = '<p class="text-primary"><i class="fa fa-spinner fa-spin mr-2"></i>正在运行...</p>';
+            
+            try {
+                const outputs = [];
+                
+                const originalLog = console.log;
+                console.log = function(...args) {
+                    outputs.push(args.map(arg => {
+                        if (typeof arg === 'object') {
+                            return JSON.stringify(arg);
+                        }
+                        return String(arg);
+                    }).join(' '));
+                };
+                
+                eval(code);
+                
+                console.log = originalLog;
+                
+                if (outputs.length > 0) {
+                    outputArea.innerHTML = `
+                        <div class="space-y-2">
+                            ${outputs.map(line => `
+                                <div class="bg-white p-3 rounded-lg border border-gray-200 font-mono text-sm">
+                                    <span class="text-gray-500 mr-2">></span>${line}
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                } else {
+                    outputArea.innerHTML = '<p class="text-green-600"><i class="fa fa-check-circle mr-2"></i>代码执行成功（无输出）</p>';
+                }
+            } catch (error) {
+                outputArea.innerHTML = `
+                    <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                        <p class="text-red-600 font-semibold mb-2"><i class="fa fa-times-circle mr-2"></i>运行错误</p>
+                        <p class="text-red-500 font-mono text-sm">${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        showModule(1);
+    </script>
+</body>
+</html>

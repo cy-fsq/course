@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据分析技术在线学习 - 郑利娜老师</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10b981',
+                        secondary: '#f1f5f9',
+                    },
+                },
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+        .knowledge-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 4px solid #10b981;
+        }
+        .code-block {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 12px 0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+        .code-keyword { color: #c678dd; }
+        .code-string { color: #98c379; }
+        .code-number { color: #d19a66; }
+        .code-function { color: #61afef; }
+        .code-comment { color: #5c6370; }
+        .output-box {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 100px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 顶部导航 -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <i class="fa fa-arrow-left text-primary text-xl"></i>
+                <span class="text-gray-600">返回主页</span>
+            </a>
+            <h1 class="text-xl font-bold text-gray-800">数据分析技术</h1>
+            <div class="text-primary font-medium">在线学习</div>
+        </div>
+    </nav>
+
+    <!-- Hero区域 -->
+    <section class="gradient-bg text-white py-16">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-4">📊 数据分析技术在线学习</h1>
+            <p class="text-xl opacity-90 mb-8">7个核心知识点 · NumPy与Pandas · 边学边练</p>
+            <div class="flex justify-center space-x-6 text-sm">
+                <div class="flex items-center">
+                    <i class="fa fa-code mr-2"></i>
+                    <span>在线运行代码</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fa fa-clock-o mr-2"></i>
+                    <span>约90分钟</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fa fa-star mr-2"></i>
+                    <span>7个核心知识点</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 课程内容 -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <!-- 知识模块选择 -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">📚 选择学习模块</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <button onclick="showModule(1)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">🔢</div>
+                    <div class="font-semibold text-gray-800">第1节</div>
+                    <div class="text-sm text-gray-500">NumPy数组</div>
+                </button>
+                <button onclick="showModule(2)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">📋</div>
+                    <div class="font-semibold text-gray-800">第2节</div>
+                    <div class="text-sm text-gray-500">Pandas数据框</div>
+                </button>
+                <button onclick="showModule(3)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">🔍</div>
+                    <div class="font-semibold text-gray-800">第3节</div>
+                    <div class="text-sm text-gray-500">数据选择与筛选</div>
+                </button>
+                <button onclick="showModule(4)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">🧹</div>
+                    <div class="font-semibold text-gray-800">第4节</div>
+                    <div class="text-sm text-gray-500">数据清洗</div>
+                </button>
+                <button onclick="showModule(5)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">📊</div>
+                    <div class="font-semibold text-gray-800">第5节</div>
+                    <div class="text-sm text-gray-500">数据统计</div>
+                </button>
+                <button onclick="showModule(6)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">🔗</div>
+                    <div class="font-semibold text-gray-800">第6节</div>
+                    <div class="text-sm text-gray-500">数据合并</div>
+                </button>
+                <button onclick="showModule(7)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">📈</div>
+                    <div class="font-semibold text-gray-800">第7节</div>
+                    <div class="text-sm text-gray-500">数据可视化</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- 第1节：NumPy数组 -->
+        <div id="module-1" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">1</span>
+                    NumPy数组基础
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        NumPy是Python数据分析的基础库，提供高性能的多维数组对象ndarray。数组支持向量化运算，比Python列表更高效。
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-4 mb-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-2">np.array()</div>
+                            <code class="text-blue-600">从列表创建数组</code>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-2">np.arange()</div>
+                            <code class="text-green-600">创建范围数组</code>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg">
+                            <div class="font-semibold text-purple-800 mb-2">np.zeros()</div>
+                            <code class="text-purple-600">创建全零数组</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 模拟NumPy的简单实现</span>
+<span class="code-keyword">class</span> <span class="code-function">np</span>:
+    <span class="code-keyword">@staticmethod</span>
+    <span class="code-keyword">def</span> <span class="code-function">array</span>(data):
+        <span class="code-keyword">return</span> data
+    
+    <span class="code-keyword">@staticmethod</span>
+    <span class="code-keyword">def</span> <span class="code-function">sum</span>(arr):
+        <span class="code-keyword">return</span> <span class="code-function">sum</span>(arr)
+    
+    <span class="code-keyword">@staticmethod</span>
+    <span class="code-function">mean</span>(arr):
+        <span class="code-keyword">return</span> <span class="code-function">sum</span>(arr) / <span class="code-function">len</span>(arr)
+
+<span class="code-comment"># 创建数组</span>
+<span class="code-variable">scores</span> = [<span class="code-number">85</span>, <span class="code-number">92</span>, <span class="code-number">78</span>, <span class="code-number">95</span>, <span class="code-number">88</span>]
+<span class="code-function">print</span>(<span class="code-string">f"成绩数组：{scores}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"总分：{np.sum(scores)}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"平均分：{np.mean(scores):.1f}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"最高分：{max(scores)}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"最低分：{min(scores)}"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第2节：Pandas数据框 -->
+        <div id="module-2" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">2</span>
+                    Pandas数据框
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        DataFrame是Pandas的核心数据结构，类似于Excel表格，由行和列组成，每列可以是不同的数据类型。
+                    </p>
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <div class="font-semibold text-purple-800 mb-2">DataFrame结构</div>
+                        <div class="text-purple-600 text-sm">
+                            包含：行索引(index)、列名(columns)、数据区域(values)
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 模拟DataFrame</span>
+<span class="code-variable">data</span> = {
+    <span class="code-string">"姓名"</span>: [<span class="code-string">"张三"</span>, <span class="code-string">"李四"</span>, <span class="code-string">"王五"</span>, <span class="code-string">"赵六"</span>],
+    <span class="code-string">"语文"</span>: [<span class="code-number">85</span>, <span class="code-number">92</span>, <span class="code-number">78</span>, <span class="code-number">88</span>],
+    <span class="code-string">"数学"</span>: [<span class="code-number">90</span>, <span class="code-number">85</span>, <span class="code-number">95</span>, <span class="code-number">82</span>],
+    <span class="code-string">"英语"</span>: [<span class="code-number">88</span>, <span class="code-number">90</span>, <span class="code-number">82</span>, <span class="code-number">91</span>]
+}
+
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">40</span>)
+<span class="code-function">print</span>(<span class="code-string">"学生成绩表"</span>)
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">40</span>)
+<span class="code-keyword">for</span> i, name <span class="code-keyword">in</span> <span class="code-function">enumerate</span>(data[<span class="code-string">"姓名"</span>]):
+    <span class="code-function">print</span>(<span class="code-string">f"{name}: 语文{data['语文'][i]}, 数学{data['数学'][i]}, 英语{data['英语'][i]}"</span>)
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">40</span>)
+
+<span class="code-comment"># 计算每科平均分</span>
+<span class="code-variable">avg_chinese</span> = <span class="code-function">sum</span>(data[<span class="code-string">"语文"</span>]) / <span class="code-function">len</span>(data[<span class="code-string">"语文"</span>])
+<span class="code-variable">avg_math</span> = <span class="code-function">sum</span>(data[<span class="code-string">"数学"</span>]) / <span class="code-function">len</span>(data[<span class="code-string">"数学"</span>])
+<span class="code-variable">avg_english</span> = <span class="code-function">sum</span>(data[<span class="code-string">"英语"</span>]) / <span class="code-function">len</span>(data[<span class="code-string">"英语"</span>])
+<span class="code-function">print</span>(<span class="code-string">f"平均分: 语文{avg_chinese:.1f}, 数学{avg_math:.1f}, 英语{avg_english:.1f}"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第3节：数据选择与筛选 -->
+        <div id="module-3" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">3</span>
+                    数据选择与筛选
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        数据筛选是数据分析的核心操作，通过条件表达式筛选出满足条件的行数据。
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-2">按列选择</div>
+                            <code class="text-blue-600">df['列名']</code>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-2">条件筛选</div>
+                            <code class="text-green-600">df[df['列'] > 60]</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 学生成绩数据</span>
+<span class="code-variable">students</span> = [
+    {<span class="code-string">"姓名"</span>: <span class="code-string">"张三"</span>, <span class="code-string">"成绩"</span>: <span class="code-number">85</span>},
+    {<span class="code-string">"姓名"</span>: <span class="code-string">"李四"</span>, <span class="code-string">"成绩"</span>: <span class="code-number">92</span>},
+    {<span class="code-string">"姓名"</span>: <span class="code-string">"王五"</span>, <span class="code-string">"成绩"</span>: <span class="code-number">78</span>},
+    {<span class="code-string">"姓名"</span>: <span class="code-string">"赵六"</span>, <span class="code-string">"成绩"</span>: <span class="code-number">95</span>}
+]
+
+<span class="code-function">print</span>(<span class="code-string">"所有学生："</span>)
+<span class="code-keyword">for</span> s <span class="code-keyword">in</span> students:
+    <span class="code-function">print</span>(<span class="code-string">f"  {s['姓名']}: {s['成绩']}分"</span>)
+
+<span class="code-comment"># 筛选成绩 >= 90 的学生</span>
+<span class="code-function">print</span>(<span class="code-string">"\n成绩 >= 90 分的学生："</span>)
+<span class="code-variable">high_scores</span> = [s <span class="code-keyword">for</span> s <span class="code-keyword">in</span> students <span class="code-keyword">if</span> s[<span class="code-string">"成绩"</span>] >= <span class="code-number">90</span>]
+<span class="code-keyword">for</span> s <span class="code-keyword">in</span> high_scores:
+    <span class="code-function">print</span>(<span class="code-string">f"  {s['姓名']}: {s['成绩']}分"</span>)
+
+<span class="code-comment"># 筛选成绩 80-90 之间的学生</span>
+<span class="code-function">print</span>(<span class="code-string">"\n成绩 80-90 分之间的学生："</span>)
+<span class="code-variable">mid_scores</span> = [s <span class="code-keyword">for</span> s <span class="code-keyword">in</span> students <span class="code-keyword">if</span> <span class="code-number">80</span> <= s[<span class="code-string">"成绩"</span>] < <span class="code-number">90</span>]
+<span class="code-keyword">for</span> s <span class="code-keyword">in</span> mid_scores:
+    <span class="code-function">print</span>(<span class="code-string">f"  {s['姓名']}: {s['成绩']}分"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第4节：数据清洗 -->
+        <div id="module-4" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">4</span>
+                    数据清洗
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        数据清洗是数据分析的第一步，主要处理缺失值、重复值、异常值等问题，确保数据质量。
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-4 mb-4">
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <div class="font-semibold text-red-800 mb-2">缺失值</div>
+                            <code class="text-red-600">fillna() / dropna()</code>
+                        </div>
+                        <div class="bg-orange-50 p-4 rounded-lg">
+                            <div class="font-semibold text-orange-800 mb-2">重复值</div>
+                            <code class="text-orange-600">drop_duplicates()</code>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg">
+                            <div class="font-semibold text-yellow-800 mb-2">异常值</div>
+                            <code class="text-yellow-600">IQR方法</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 模拟数据清洗操作</span>
+<span class="code-variable">raw_data</span> = [<span class="code-number">85</span>, <span class="code-number">None</span>, <span class="code-number">78</span>, <span class="code-number">92</span>, <span class="code-number">None</span>, <span class="code-number">88</span>]
+
+<span class="code-function">print</span>(<span class="code-string">f"原始数据：{raw_data}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"缺失值数量：{raw_data.count(None)}"</span>)
+
+<span class="code-comment"># 处理缺失值（用平均值填充）</span>
+<span class="code-variable">valid_nums</span> = [x <span class="code-keyword">for</span> x <span class="code-variable">raw_data</span> <span class="code-keyword">if</span> x <span class="code-keyword">is not None</span>]
+<span class="code-variable">avg</span> = <span class="code-function">sum</span>(valid_nums) / <span class="code-function">len</span>(valid_nums)
+<span class="code-variable">cleaned_data</span> = [avg <span class="code-keyword">if</span> x <span class="code-keyword">is None</span> <span class="code-keyword">else</span> x <span class="code-keyword">for</span> x <span class="code-variable">raw_data</span>]
+
+<span class="code-function">print</span>(<span class="code-string">f"平均值：{avg:.1f}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"清洗后数据：{[round(x, 1) for x in cleaned_data]}"</span>)
+
+<span class="code-comment"># 去除重复</span>
+<span class="code-variable">with_duplicates</span> = [<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">2</span>, <span class="code-number">3</span>, <span class="code-number">3</span>, <span class="code-number">3</span>]
+<span class="code-variable">unique</span> = <span class="code-function">list</span>(<span class="code-function">set</span>(with_duplicates))
+<span class="code-function">print</span>(<span class="code-string">f"去重前：{with_duplicates}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"去重后：{sorted(unique)}"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第5节：数据统计 -->
+        <div id="module-5" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">5</span>
+                    数据统计
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        描述性统计是数据分析的基础，通过计算各种统计量来了解数据的基本特征。
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-2">集中趋势</div>
+                            <code class="text-blue-600">mean, median, mode</code>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-2">离散程度</div>
+                            <code class="text-green-600">std, variance, range</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-keyword">import</span> math
+
+<span class="code-comment"># 销售数据</span>
+<span class="code-variable">sales</span> = [<span class="code-number">120</span>, <span class="code-number">150</span>, <span class="code-number">130</span>, <span class="code-number">180</span>, <span class="code-number">160</span>, <span class="code-number">140</span>, <span class="code-number">170</span>, <span class="code-number">155</span>]
+
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">40</span>)
+<span class="code-function">print</span>(<span class="code-string">"销售数据统计分析"</span>)
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">40</span>)
+<span class="code-function">print</span>(<span class="code-string">f"数据：{sales}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"数量：{len(sales)}"</span>)
+
+<span class="code-comment"># 计算统计量</span>
+<span class="code-variable">n</span> = <span class="code-function">len</span>(sales)
+<span class="code-variable">total</span> = <span class="code-function">sum</span>(sales)
+<span class="code-variable">mean</span> = total / n
+<span class="code-variable">sorted_sales</span> = <span class="code-function">sorted</span>(sales)
+<span class="code-variable">median</span> = (sorted_sales[n//<span class="code-number">2</span>-<span class="code-number">1</span>] + sorted_sales[n//<span class="code-number">2</span>]) / <span class="code-number">2</span> <span class="code-keyword">if</span> n % <span class="code-number">2</span> == <span class="code-number">0</span> <span class="code-keyword">else</span> sorted_sales[n//<span class="code-number">2</span>]
+
+<span class="code-comment"># 计算标准差</span>
+<span class="code-variable">variance</span> = <span class="code-function">sum</span>((x - mean)**<span class="code-number">2</span> <span class="code-keyword">for</span> x <span class="code-keyword">in</span> sales) / n
+<span class="code-variable">std</span> = math.<span class="code-function">sqrt</span>(variance)
+
+<span class="code-function">print</span>(<span class="code-string">f"总和：{total}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"平均值：{mean:.2f}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"中位数：{median:.2f}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"最大值：{max(sales)}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"最小值：{min(sales)}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"标准差：{std:.2f}"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第6节：数据合并 -->
+        <div id="module-6" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">6</span>
+                    数据合并
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        数据合并是将多个数据源整合在一起的操作，常用的有concat（拼接）和merge（关联）两种方式。
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-2">concat - 拼接</div>
+                            <code class="text-blue-600">纵向或横向拼接多个表</code>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-2">merge - 关联</div>
+                            <code class="text-green-600">基于共同键合并表</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 模拟数据合并操作</span>
+<span class="code-comment"># 表1：学生信息</span>
+<span class="code-variable">students</span> = {
+    <span class="code-string">"学号"</span>: [<span class="code-string">"001"</span>, <span class="code-string">"002"</span>, <span class="code-string">"003"</span>],
+    <span class="code-string">"姓名"</span>: [<span class="code-string">"张三"</span>, <span class="code-string">"李四"</span>, <span class="code-string">"王五"</span>]
+}
+
+<span class="code-comment"># 表2：成绩信息</span>
+<span class="code-variable">scores</span> = {
+    <span class="code-string">"学号"</span>: [<span class="code-string">"001"</span>, <span class="code-string">"002"</span>, <span class="code-string">"003"</span>],
+    <span class="code-string">"成绩"</span>: [<span class="code-number">85</span>, <span class="code-number">92</span>, <span class="code-number">78</span>]
+}
+
+<span class="code-function">print</span>(<span class="code-string">"学生信息表："</span>)
+<span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-function">len</span>(students[<span class="code-string">"学号"</span>])):
+    <span class="code-function">print</span>(<span class="code-string">f"  {students['学号'][i]}: {students['姓名'][i]}"</span>)
+
+<span class="code-function">print</span>(<span class="code-string">"\n成绩表："</span>)
+<span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-function">len</span>(scores[<span class="code-string">"学号"</span>])):
+    <span class="code-function">print</span>(<span class="code-string">f"  {scores['学号'][i]}: {scores['成绩'][i]}分"</span>)
+
+<span class="code-comment"># 基于学号合并数据</span>
+<span class="code-function">print</span>(<span class="code-string">"\n合并后的数据表："</span>)
+<span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-function">len</span>(students[<span class="code-string">"学号"</span>])):
+    student_id = students[<span class="code-string">"学号"</span>][i]
+    <span class="code-keyword">if</span> student_id <span class="code-keyword">in</span> scores[<span class="code-string">"学号"</span>]:
+        idx = scores[<span class="code-string">"学号"</span>].<span class="code-function">index</span>(student_id)
+        score = scores[<span class="code-string">"成绩"</span>][idx]
+        <span class="code-function">print</span>(<span class="code-string">f"  {student_id} | {students['姓名'][i]} | {score}分"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第7节：数据可视化 -->
+        <div id="module-7" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">7</span>
+                    数据可视化
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        数据可视化将数据转换为图表，使数据更直观易懂。常用图表包括柱状图、折线图、饼图等。
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-4 mb-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-2">柱状图</div>
+                            <code class="text-blue-600">比较类别数据</code>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-2">折线图</div>
+                            <code class="text-green-600">展示趋势变化</code>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg">
+                            <div class="font-semibold text-purple-800 mb-2">饼图</div>
+                            <code class="text-purple-600">显示占比关系</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 模拟数据可视化（文本图表）</span>
+<span class="code-comment"># 月度销售额数据</span>
+<span class="code-variable">months</span> = [<span class="code-string">"1月"</span>, <span class="code-string">"2月"</span>, <span class="code-string">"3月"</span>, <span class="code-string">"4月"</span>, <span class="code-string">"5月"</span>]
+<span class="code-variable">sales</span> = [<span class="code-number">120</span>, <span class="code-number">150</span>, <span class="code-number">130</span>, <span class="code-number">180</span>, <span class="code-number">200</span>]
+
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">50</span>)
+<span class="code-function">print</span>(<span class="code-string">"月度销售额柱状图（文本版）"</span>)
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">50</span>)
+<span class="code-function">print</span>(<span class="code-string">"单位：万元"</span>)
+<span class="code-function">print</span>()
+
+<span class="code-keyword">for</span> i, month <span class="code-keyword">in</span> <span class="code-function">enumerate</span>(months):
+    bar = <span class="code-string">"█"</span> * (sales[i] // <span class="code-number">10</span>)
+    <span class="code-function">print</span>(<span class="code-string">f"{month:4} | {bar:20} {sales[i]}"</span>)
+
+<span class="code-function">print</span>()
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">50</span>)
+<span class="code-function">print</span>(<span class="code-string">"销售额趋势分析"</span>)
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">50</span>)
+
+<span class="code-variable">max_sale</span> = <span class="code-function">max</span>(sales)
+<span class="code-variable">min_sale</span> = <span class="code-function">min</span>(sales)
+<span class="code-variable">max_month</span> = months[sales.<span class="code-function">index</span>(max_sale)]
+<span class="code-variable">min_month</span> = months[sales.<span class="code-function">index</span>(min_sale)]
+<span class="code-function">print</span>(<span class="code-string">f"最高销售额：{max_sale}万元 ({max_month})"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"最低销售额：{min_sale}万元 ({min_month})"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"总销售额：{sum(sales)}万元"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 综合代码编辑器 -->
+        <div class="mt-12 bg-white rounded-2xl shadow-xl p-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+                    <span class="text-3xl mr-3">🚀</span>
+                    综合代码编辑器
+                </h2>
+                <button onclick="runAllCode()" class="bg-gradient-to-r from-primary to-emerald-600 text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity flex items-center">
+                    <i class="fa fa-play mr-2"></i>
+                    运行全部代码
+                </button>
+            </div>
+            
+            <p class="text-gray-600 mb-4">
+                将上面示例中的代码复制到下方编辑器中，点击"运行全部代码"查看结果：
+            </p>
+            
+            <div class="mb-4">
+                <div id="main-editor" class="rounded-lg overflow-hidden border-2 border-gray-200" style="height: 400px;"></div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold text-gray-700 mb-3 flex items-center">
+                    <span class="mr-2">📤</span> 运行结果
+                </h3>
+                <div id="output-area" class="output-box">
+                    <p class="text-gray-400 text-center">点击"运行全部代码"按钮查看输出结果</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-gray-400">© 2026 郑利娜 - 广东科学技术职业学院 · 商务数据分析与应用专业</p>
+        </div>
+    </footer>
+
+    <script>
+        // 初始化主编辑器
+        const editor = ace.edit("main-editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/python");
+        editor.setFontSize(14);
+        editor.setShowPrintMargin(false);
+
+        // 默认代码
+        editor.setValue(`# 数据分析技术 - 综合练习
+# 在下方编写你的代码，点击"运行全部代码"执行
+
+# 示例：NumPy数组操作
+scores = [85, 92, 78, 95, 88]
+print(f"成绩数组：{scores}")
+print(f"总分：{sum(scores)}")
+print(f"平均分：{sum(scores)/len(scores):.1f}")
+
+# 示例：数据筛选
+students = [
+    {"姓名": "张三", "成绩": 85},
+    {"姓名": "李四", "成绩": 92},
+    {"姓名": "王五", "成绩": 78}
+]
+print("\\n成绩 >= 85 的学生：")
+high_scores = [s for s in students if s["成绩"] >= 85]
+for s in high_scores:
+    print(f"  {s['姓名']}: {s['成绩']}分")
+
+# 示例：数据统计
+data = [120, 150, 130, 180, 160]
+print(f"\\n销售数据：{data}")
+print(f"最大值：{max(data)}")
+print(f"最小值：{min(data)}")
+`, -1);
+
+        // 显示指定模块
+        function showModule(num) {
+            document.querySelectorAll('.module-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            const module = document.getElementById(`module-${num}`);
+            if (module) {
+                module.classList.remove('hidden');
+                module.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // 运行代码
+        function runAllCode() {
+            const code = editor.getValue();
+            const outputArea = document.getElementById('output-area');
+            
+            outputArea.innerHTML = '<p class="text-primary"><i class="fa fa-spinner fa-spin mr-2"></i>正在运行...</p>';
+            
+            try {
+                const outputs = [];
+                
+                const originalLog = console.log;
+                console.log = function(...args) {
+                    outputs.push(args.map(arg => {
+                        if (typeof arg === 'object') {
+                            return JSON.stringify(arg);
+                        }
+                        return String(arg);
+                    }).join(' '));
+                };
+                
+                eval(code);
+                
+                console.log = originalLog;
+                
+                if (outputs.length > 0) {
+                    outputArea.innerHTML = `
+                        <div class="space-y-2">
+                            ${outputs.map(line => `
+                                <div class="bg-white p-3 rounded-lg border border-gray-200 font-mono text-sm">
+                                    <span class="text-gray-500 mr-2">></span>${line}
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                } else {
+                    outputArea.innerHTML = '<p class="text-green-600"><i class="fa fa-check-circle mr-2"></i>代码执行成功（无输出）</p>';
+                }
+            } catch (error) {
+                outputArea.innerHTML = `
+                    <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                        <p class="text-red-600 font-semibold mb-2"><i class="fa fa-times-circle mr-2"></i>运行错误</p>
+                        <p class="text-red-500 font-mono text-sm">${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        showModule(1);
+    </script>
+</body>
+</html>

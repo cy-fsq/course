@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据库原理与应用在线学习 - 郑利娜老师</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#06b6d4',
+                        secondary: '#f1f5f9',
+                    },
+                },
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+        .knowledge-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 4px solid #06b6d4;
+        }
+        .code-block {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 12px 0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+        .code-keyword { color: #c678dd; }
+        .code-string { color: #98c379; }
+        .code-number { color: #d19a66; }
+        .code-function { color: #61afef; }
+        .code-comment { color: #5c6370; }
+        .output-box {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 100px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 顶部导航 -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <i class="fa fa-arrow-left text-primary text-xl"></i>
+                <span class="text-gray-600">返回主页</span>
+            </a>
+            <h1 class="text-xl font-bold text-gray-800">数据库原理与应用</h1>
+            <div class="text-primary font-medium">在线学习</div>
+        </div>
+    </nav>
+
+    <!-- Hero区域 -->
+    <section class="gradient-bg text-white py-16">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-4">🗄️ 数据库原理与应用在线学习</h1>
+            <p class="text-xl opacity-90 mb-8">7个核心知识点 · SQL查询与数据库设计 · 边学边练</p>
+            <div class="flex justify-center space-x-6 text-sm">
+                <div class="flex items-center">
+                    <i class="fa fa-code mr-2"></i>
+                    <span>在线运行代码</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fa fa-clock-o mr-2"></i>
+                    <span>约90分钟</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fa fa-star mr-2"></i>
+                    <span>7个核心知识点</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 课程内容 -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <!-- 知识模块选择 -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">📚 选择学习模块</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <button onclick="showModule(1)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">📊</div>
+                    <div class="font-semibold text-gray-800">第1节</div>
+                    <div class="text-sm text-gray-500">数据库基础</div>
+                </button>
+                <button onclick="showModule(2)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">📝</div>
+                    <div class="font-semibold text-gray-800">第2节</div>
+                    <div class="text-sm text-gray-500">SQL基础查询</div>
+                </button>
+                <button onclick="showModule(3)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">🔍</div>
+                    <div class="font-semibold text-gray-800">第3节</div>
+                    <div class="text-sm text-gray-500">条件查询与排序</div>
+                </button>
+                <button onclick="showModule(4)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">🔗</div>
+                    <div class="font-semibold text-gray-800">第4节</div>
+                    <div class="text-sm text-gray-500">表连接查询</div>
+                </button>
+                <button onclick="showModule(5)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">📈</div>
+                    <div class="font-semibold text-gray-800">第5节</div>
+                    <div class="text-sm text-gray-500">聚合函数与分组</div>
+                </button>
+                <button onclick="showModule(6)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">✏️</div>
+                    <div class="font-semibold text-gray-800">第6节</div>
+                    <div class="text-sm text-gray-500">数据操作</div>
+                </button>
+                <button onclick="showModule(7)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">🏗️</div>
+                    <div class="font-semibold text-gray-800">第7节</div>
+                    <div class="text-sm text-gray-500">数据库设计</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- 第1节：数据库基础 -->
+        <div id="module-1" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">1</span>
+                    数据库基础
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        数据库是长期存储在计算机内、有组织的、可共享的数据集合。关系型数据库使用表来组织数据，表由行（记录）和列（字段）组成。
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-4 mb-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-2">表(Table)</div>
+                            <code class="text-blue-600">数据存储的基本单位</code>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-2">记录(Row)</div>
+                            <code class="text-green-600">表中的一行数据</code>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg">
+                            <div class="font-semibold text-purple-800 mb-2">字段(Column)</div>
+                            <code class="text-purple-600">表中的一列数据</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 模拟数据库表结构</span>
+<span class="code-comment"># 学生表</span>
+<span class="code-variable">students_table</span> = {
+    <span class="code-string">"表名"</span>: <span class="code-string">"students"</span>,
+    <span class="code-string">"字段"</span>: [<span class="code-string">"学号"</span>, <span class="code-string">"姓名"</span>, <span class="code-string">"年龄"</span>, <span class="code-string">"专业"</span>],
+    <span class="code-string">"记录"</span>: [
+        [<span class="code-string">"001"</span>, <span class="code-string">"张三"</span>, <span class="code-number">20</span>, <span class="code-string">"计算机"</span>],
+        [<span class="code-string">"002"</span>, <span class="code-string">"李四"</span>, <span class="code-number">21</span>, <span class="code-string">"数学"</span>],
+        [<span class="code-string">"003"</span>, <span class="code-string">"王五"</span>, <span class="code-number">19</span>, <span class="code-string">"物理"</span>]
+    ]
+}
+
+<span class="code-function">print</span>(<span class="code-string">f"表名：{students_table['表名']}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"字段：{', '.join(students_table['字段'])}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"记录数：{len(students_table['记录'])}"</span>)
+<span class="code-function">print</span>(<span class="code-string">"\n表数据："</span>)
+<span class="code-function">print</span>(<span class="code-string">-"</span>*<span class="code-number">50</span>)
+<span class="code-keyword">for</span> record <span class="code-keyword">in</span> students_table[<span class="code-string">"记录"</span>]:
+    <span class="code-function">print</span>(<span class="code-string">f"  {record[0]} | {record[1]} | {record[2]}岁 | {record[3]}"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第2节：SQL基础查询 -->
+        <div id="module-2" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">2</span>
+                    SQL基础查询
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        SQL(Structured Query Language)是用于管理和操作关系型数据库的标准语言。SELECT语句用于从数据库中查询数据。
+                    </p>
+                    <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                        <div class="font-semibold text-blue-800 mb-2">基本语法</div>
+                        <code class="text-blue-600">SELECT 字段 FROM 表名;</code>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 模拟SQL查询操作</span>
+<span class="code-comment"># 产品表数据</span>
+<span class="code-variable">products</span> = [
+    {<span class="code-string">"id"</span>: <span class="code-number">1</span>, <span class="code-string">"name"</span>: <span class="code-string">"笔记本"</span>, <span class="code-string">"price"</span>: <span class="code-number">5000</span>, <span class="code-string">"category"</span>: <span class="code-string">"电子产品"</span>},
+    {<span class="code-string">"id"</span>: <span class="code-number">2</span>, <span class="code-string">"name"</span>: <span class="code-string">"手机"</span>, <span class="code-string">"price"</span>: <span class="code-number">3000</span>, <span class="code-string">"category"</span>: <span class="code-string">"电子产品"</span>},
+    {<span class="code-string">"id"</span>: <span class="code-number">3</span>, <span class="code-string">"name"</span>: <span class="code-string">"桌子"</span>, <span class="code-string">"price"</span>: <span class="code-number">800</span>, <span class="code-string">"category"</span>: <span class="code-string">"家具"</span>}
+]
+
+<span class="code-comment"># SELECT * FROM products</span>
+<span class="code-function">print</span>(<span class="code-string">"查询所有产品："</span>)
+<span class="code-function">print</span>(<span class="code-string">="</span>*<span class="code-number">50</span>)
+<span class="code-keyword">for</span> p <span class="code-keyword">in</span> products:
+    <span class="code-function">print</span>(<span class="code-string">f"  {p['id']} | {p['name']} | ¥{p['price']} | {p['category']}"</span>)
+
+<span class="code-comment"># SELECT name, price FROM products</span>
+<span class="code-function">print</span>(<span class="code-string">"\n只查询名称和价格："</span>)
+<span class="code-function">print</span>(<span class="code-string">="</span>*<span class="code-number">50</span>)
+<span class="code-keyword">for</span> p <span class="code-keyword">in</span> products:
+    <span class="code-function">print</span>(<span class="code-string">f"  {p['name']}: ¥{p['price']}"</span>)
+
+<span class="code-comment"># SELECT DISTINCT category FROM products</span>
+<span class="code-variable">categories</span> = <span class="code-function">list</span>(<span class="code-function">set</span>(p[<span class="code-string">"category"</span>] <span class="code-keyword">for</span> p <span class="code-keyword">in</span> products))
+<span class="code-function">print</span>(<span class="code-string">f"\n产品类别：{', '.join(categories)}"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第3节：条件查询与排序 -->
+        <div id="module-3" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">3</span>
+                    条件查询与排序
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        WHERE子句用于筛选满足条件的记录，ORDER BY用于对结果进行排序。常用运算符包括=、>、<、>=、<=、<>、LIKE、IN、BETWEEN等。
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-2">WHERE</div>
+                            <code class="text-blue-600">筛选条件</code>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-2">ORDER BY</div>
+                            <code class="text-green-600">ASC升序/DESC降序</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 员工表数据</span>
+<span class="code-variable">employees</span> = [
+    {<span class="code-string">"id"</span>: <span class="code-number">1</span>, <span class="code-string">"name"</span>: <span class="code-string">"张三"</span>, <span class="code-string">"salary"</span>: <span class="code-number">8000</span>, <span class="code-string">"dept"</span>: <span class="code-string">"技术部"</span>},
+    {<span class="code-string">"id"</span>: <span class="code-number">2</span>, <span class="code-string">"name"</span>: <span class="code-string">"李四"</span>, <span class="code-string">"salary"</span>: <span class="code-number">12000</span>, <span class="code-string">"dept"</span>: <span class="code-string">"技术部"</span>},
+    {<span class="code-string">"id"</span>: <span class="code-number">3</span>, <span class="code-string">"name"</span>: <span class="code-string">"王五"</span>, <span class="code-string">"salary"</span>: <span class="code-number">6000</span>, <span class="code-string">"dept"</span>: <span class="code-string">"销售部"</span>},
+    {<span class="code-string">"id"</span>: <span class="code-number">4</span>, <span class="code-string">"name"</span>: <span class="code-string">"赵六"</span>, <span class="code-string">"salary"</span>: <span class="code-number">15000</span>, <span class="code-string">"dept"</span>: <span class="code-string">"技术部"</span>}
+]
+
+<span class="code-comment"># WHERE salary > 8000</span>
+<span class="code-function">print</span>(<span class="code-string">"工资大于8000的员工："</span>)
+<span class="code-variable">high_salary</span> = [e <span class="code-keyword">for</span> e <span class="code-keyword">in</span> employees <span class="code-keyword">if</span> e[<span class="code-string">"salary"</span>] > <span class="code-number">8000</span>]
+<span class="code-keyword">for</span> e <span class="code-keyword">in</span> high_salary:
+    <span class="code-function">print</span>(<span class="code-string">f"  {e['name']}: ¥{e['salary']}"</span>)
+
+<span class="code-comment"># WHERE dept = '技术部'</span>
+<span class="code-function">print</span>(<span class="code-string">"\n技术部员工："</span>)
+<span class="code-variable">tech_dept</span> = [e <span class="code-keyword">for</span> e <span class="code-keyword">in</span> employees <span class="code-keyword">if</span> e[<span class="code-string">"dept"</span>] == <span class="code-string">"技术部"</span>]
+<span class="code-keyword">for</span> e <span class="code-keyword">in</span> tech_dept:
+    <span class="code-function">print</span>(<span class="code-string">f"  {e['name']}: ¥{e['salary']}"</span>)
+
+<span class="code-comment"># ORDER BY salary DESC</span>
+<span class="code-function">print</span>(<span class="code-string">"\n按工资降序排列："</span>)
+<span class="code-variable">sorted_emp</span> = <span class="code-function">sorted</span>(employees, key=<span class="code-keyword">lambda</span> x: x[<span class="code-string">"salary"</span>], reverse=<span class="code-keyword">True</span>)
+<span class="code-keyword">for</span> e <span class="code-keyword">in</span> sorted_emp:
+    <span class="code-function">print</span>(<span class="code-string">f"  {e['name']}: ¥{e['salary']}"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第4节：表连接查询 -->
+        <div id="module-4" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">4</span>
+                    表连接查询
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        JOIN操作用于根据两个或多个表之间的关联字段组合数据。常用连接类型包括INNER JOIN、LEFT JOIN、RIGHT JOIN等。
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-3 mb-4">
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-1">INNER JOIN</div>
+                            <code class="text-blue-600 text-sm">返回匹配的记录</code>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-1">LEFT JOIN</div>
+                            <code class="text-green-600 text-sm">返回左表所有记录</code>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg">
+                            <div class="font-semibold text-purple-800 mb-1">RIGHT JOIN</div>
+                            <code class="text-purple-600 text-sm">返回右表所有记录</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 订单表</span>
+<span class="code-variable">orders</span> = [
+    {<span class="code-string">"order_id"</span>: <span class="code-number">1</span>, <span class="code-string">"customer_id"</span>: <span class="code-number">101</span>, <span class="code-string">"amount"</span>: <span class="code-number">500</span>},
+    {<span class="code-string">"order_id"</span>: <span class="code-number">2</span>, <span class="code-string">"customer_id"</span>: <span class="code-number">102</span>, <span class="code-string">"amount"</span>: <span class="code-number">800</span>},
+    {<span class="code-string">"order_id"</span>: <span class="code-number">3</span>, <span class="code-string">"customer_id"</span>: <span class="code-number">101</span>, <span class="code-string">"amount"</span>: <span class="code-number">300</span>}
+]
+
+<span class="code-comment"># 客户表</span>
+<span class="code-variable">customers</span> = [
+    {<span class="code-string">"customer_id"</span>: <span class="code-number">101</span>, <span class="code-string">"name"</span>: <span class="code-string">"张三"</span>},
+    {<span class="code-string">"customer_id"</span>: <span class="code-number">102</span>, <span class="code-string">"name"</span>: <span class="code-string">"李四"</span>},
+    {<span class="code-string">"customer_id"</span>: <span class="code-number">103</span>, <span class="code-string">"name"</span>: <span class="code-string">"王五"</span>}
+]
+
+<span class="code-comment"># INNER JOIN</span>
+<span class="code-function">print</span>(<span class="code-string">"订单与客户信息（INNER JOIN）："</span>)
+<span class="code-function">print</span>(<span class="code-string">="</span>*<span class="code-number">50</span>)
+<span class="code-keyword">for</span> order <span class="code-keyword">in</span> orders:
+    <span class="code-keyword">for</span> customer <span class="code-keyword">in</span> customers:
+        <span class="code-keyword">if</span> order[<span class="code-string">"customer_id"</span>] == customer[<span class="code-string">"customer_id"</span>]:
+            <span class="code-function">print</span>(<span class="code-string">f"  订单{order['order_id']} | {customer['name']} | ¥{order['amount']}"</span>)
+
+<span class="code-comment"># LEFT JOIN（所有客户，包括没有订单的）</span>
+<span class="code-function">print</span>(<span class="code-string">"\n所有客户及其订单（LEFT JOIN）："</span>)
+<span class="code-function">print</span>(<span class="code-string">="</span>*<span class="code-number">50</span>)
+<span class="code-keyword">for</span> customer <span class="code-keyword">in</span> customers:
+    <span class="code-variable">customer_orders</span> = [o <span class="code-keyword">for</span> o <span class="code-keyword">in</span> orders <span class="code-keyword">if</span> o[<span class="code-string">"customer_id"</span>] == customer[<span class="code-string">"customer_id"</span>]]
+    <span class="code-keyword">if</span> customer_orders:
+        <span class="code-keyword">for</span> o <span class="code-keyword">in</span> customer_orders:
+            <span class="code-function">print</span>(<span class="code-string">f"  {customer['name']} | 订单{o['order_id']} | ¥{o['amount']}"</span>)
+    <span class="code-keyword">else</span>:
+        <span class="code-function">print</span>(<span class="code-string">f"  {customer['name']} | 无订单"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第5节：聚合函数与分组 -->
+        <div id="module-5" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">5</span>
+                    聚合函数与分组
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        聚合函数用于对一组值进行计算并返回单个值，常用函数包括COUNT、SUM、AVG、MAX、MIN。GROUP BY用于将数据分组后进行聚合计算。
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-2">聚合函数</div>
+                            <code class="text-blue-600">COUNT, SUM, AVG, MAX, MIN</code>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-2">分组</div>
+                            <code class="text-green-600">GROUP BY + HAVING</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 销售数据</span>
+<span class="code-variable">sales</span> = [
+    {<span class="code-string">"product"</span>: <span class="code-string">"A"</span>, <span class="code-string">"region"</span>: <span class="code-string">"北区"</span>, <span class="code-string">"amount"</span>: <span class="code-number">1000</span>},
+    {<span class="code-string">"product"</span>: <span class="code-string">"B"</span>, <span class="code-string">"region"</span>: <span class="code-string">"北区"</span>, <span class="code-string">"amount"</span>: <span class="code-number">1500</span>},
+    {<span class="code-string">"product"</span>: <span class="code-string">"A"</span>, <span class="code-string">"region"</span>: <span class="code-string">"南区"</span>, <span class="code-string">"amount"</span>: <span class="code-number">800</span>},
+    {<span class="code-string">"product"</span>: <span class="code-string">"B"</span>, <span class="code-string">"region"</span>: <span class="code-string">"南区"</span>, <span class="code-string">"amount"</span>: <span class="code-number">1200</span>},
+    {<span class="code-string">"product"</span>: <span class="code-string">"A"</span>, <span class="code-string">"region"</span>: <span class="code-string">"北区"</span>, <span class="code-string">"amount"</span>: <span class="code-number">900</span>}
+]
+
+<span class="code-comment"># 聚合函数</span>
+<span class="code-variable">amounts</span> = [s[<span class="code-string">"amount"</span>] <span class="code-keyword">for</span> s <span class="code-keyword">in</span> sales]
+<span class="code-function">print</span>(<span class="code-string">"销售数据统计："</span>)
+<span class="code-function">print</span>(<span class="code-string">="</span>*<span class="code-number">40</span>)
+<span class="code-function">print</span>(<span class="code-string">f"记录数(COUNT)：{len(sales)}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"总销售额(SUM)：¥{sum(amounts)}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"平均销售额(AVG)：¥{sum(amounts)/len(amounts):.0f}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"最高销售额(MAX)：¥{max(amounts)}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"最低销售额(MIN)：¥{min(amounts)}"</span>)
+
+<span class="code-comment"># GROUP BY region</span>
+<span class="code-function">print</span>(<span class="code-string">"\n按地区分组统计："</span>)
+<span class="code-function">print</span>(<span class="code-string">="</span>*<span class="code-number">40</span>)
+<span class="code-variable">region_stats</span> = {}
+<span class="code-keyword">for</span> s <span class="code-keyword">in</span> sales:
+    region = s[<span class="code-string">"region"</span>]
+    <span class="code-keyword">if</span> region <span class="code-keyword">not in</span> region_stats:
+        region_stats[region] = []
+    region_stats[region].<span class="code-function">append</span>(s[<span class="code-string">"amount"</span>])
+
+<span class="code-keyword">for</span> region, amounts <span class="code-keyword">in</span> region_stats.<span class="code-function">items</span>():
+    <span class="code-function">print</span>(<span class="code-string">f"{region}: 订单数{len(amounts)}, 总销售额¥{sum(amounts)}, 平均¥{sum(amounts)/len(amounts):.0f}"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第6节：数据操作 -->
+        <div id="module-6" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">6</span>
+                    数据操作
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        除了查询数据，SQL还支持数据的增删改操作。INSERT用于插入数据，UPDATE用于修改数据，DELETE用于删除数据。
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-3 mb-4">
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-1">INSERT</div>
+                            <code class="text-blue-600 text-sm">插入新记录</code>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-1">UPDATE</div>
+                            <code class="text-green-600 text-sm">修改现有记录</code>
+                        </div>
+                        <div class="bg-red-50 p-3 rounded-lg">
+                            <div class="font-semibold text-red-800 mb-1">DELETE</div>
+                            <code class="text-red-600 text-sm">删除记录</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 初始数据</span>
+<span class="code-variable">students</span> = [
+    {<span class="code-string">"id"</span>: <span class="code-number">1</span>, <span class="code-string">"name"</span>: <span class="code-string">"张三"</span>, <span class="code-string">"score"</span>: <span class="code-number">85</span>},
+    {<span class="code-string">"id"</span>: <span class="code-number">2</span>, <span class="code-string">"name"</span>: <span class="code-string">"李四"</span>, <span class="code-string">"score"</span>: <span class="code-number">90</span>}
+]
+
+<span class="code-function">print</span>(<span class="code-string">"初始学生数据："</span>)
+<span class="code-keyword">for</span> s <span class="code-keyword">in</span> students:
+    <span class="code-function">print</span>(<span class="code-string">f"  {s['id']} | {s['name']} | {s['score']}分"</span>)
+
+<span class="code-comment"># INSERT - 插入新记录</span>
+<span class="code-variable">new_student</span> = {<span class="code-string">"id"</span>: <span class="code-number">3</span>, <span class="code-string">"name"</span>: <span class="code-string">"王五"</span>, <span class="code-string">"score"</span>: <span class="code-number">88</span>}
+students.<span class="code-function">append</span>(new_student)
+<span class="code-function">print</span>(<span class="code-string">f"\n插入新学生：{new_student['name']}"</span>)
+
+<span class="code-comment"># UPDATE - 修改记录</span>
+<span class="code-keyword">for</span> s <span class="code-keyword">in</span> students:
+    <span class="code-keyword">if</span> s[<span class="code-string">"id"</span>] == <span class="code-number">1</span>:
+        s[<span class="code-string">"score"</span>] = <span class="code-number">87</span>
+        <span class="code-function">print</span>(<span class="code-string">f"更新学生{s['name']}的成绩为{s['score']}分"</span>)
+
+<span class="code-comment"># DELETE - 删除记录</span>
+students = [s <span class="code-keyword">for</span> s <span class="code-keyword">in</span> students <span class="code-keyword">if</span> s[<span class="code-string">"id"</span>] != <span class="code-number">2</span>]
+<span class="code-function">print</span>(<span class="code-string">"删除学生李四"</span>)
+
+<span class="code-comment"># 最终结果</span>
+<span class="code-function">print</span>(<span class="code-string">"\n最终学生数据："</span>)
+<span class="code-keyword">for</span> s <span class="code-keyword">in</span> students:
+    <span class="code-function">print</span>(<span class="code-string">f"  {s['id']} | {s['name']} | {s['score']}分"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第7节：数据库设计 -->
+        <div id="module-7" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">7</span>
+                    数据库设计
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        良好的数据库设计是应用系统的基础。设计过程包括需求分析、概念设计（E-R图）、逻辑设计（关系模式）、物理设计等阶段。需要遵循三大范式以减少数据冗余。
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-3 mb-4">
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-1">第一范式</div>
+                            <code class="text-blue-600 text-sm">原子性，不可再分</code>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-1">第二范式</div>
+                            <code class="text-green-600 text-sm">完全函数依赖</code>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg">
+                            <div class="font-semibold text-purple-800 mb-1">第三范式</div>
+                            <code class="text-purple-600 text-sm">消除传递依赖</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 数据库设计示例 - 学生选课系统</span>
+<span class="code-comment"># 遵循第三范式的设计</span>
+
+<span class="code-comment"># 学生表</span>
+<span class="code-variable">students</span> = [
+    {<span class="code-string">"student_id"</span>: <span class="code-string">"S001"</span>, <span class="code-string">"name"</span>: <span class="code-string">"张三"</span>, <span class="code-string">"major"</span>: <span class="code-string">"计算机"</span>},
+    {<span class="code-string">"student_id"</span>: <span class="code-string">"S002"</span>, <span class="code-string">"name"</span>: <span class="code-string">"李四"</span>, <span class="code-string">"major"</span>: <span class="code-string">"数学"</span>}
+]
+
+<span class="code-comment"># 课程表</span>
+<span class="code-variable">courses</span> = [
+    {<span class="code-string">"course_id"</span>: <span class="code-string">"C001"</span>, <span class="code-string">"name"</span>: <span class="code-string">"数据库"</span>, <span class="code-string">"credit"</span>: <span class="code-number">3</span>},
+    {<span class="code-string">"course_id"</span>: <span class="code-string">"C002"</span>, <span class="code-string">"name"</span>: <span class="code-string">"数据结构"</span>, <span class="code-string">"credit"</span>: <span class="code-number">4</span>}
+]
+
+<span class="code-comment"># 选课表（关联表）</span>
+<span class="code-variable">enrollments</span> = [
+    {<span class="code-string">"student_id"</span>: <span class="code-string">"S001"</span>, <span class="code-string">"course_id"</span>: <span class="code-string">"C001"</span>, <span class="code-string">"grade"</span>: <span class="code-number">85</span>},
+    {<span class="code-string">"student_id"</span>: <span class="code-string">"S001"</span>, <span class="code-string">"course_id"</span>: <span class="code-string">"C002"</span>, <span class="code-string">"grade"</span>: <span class="code-number">90</span>},
+    {<span class="code-string">"student_id"</span>: <span class="code-string">"S002"</span>, <span class="code-string">"course_id"</span>: <span class="code-string">"C001"</span>, <span class="code-string">"grade"</span>: <span class="code-number">88</span>}
+]
+
+<span class="code-function">print</span>(<span class="code-string">"学生选课系统 - 数据库设计示例"</span>)
+<span class="code-function">print</span>(<span class="code-string">="</span>*<span class="code-number">50</span>)
+
+<span class="code-comment"># 查询学生选课情况</span>
+<span class="code-function">print</span>(<span class="code-string">"\n学生选课详情："</span>)
+<span class="code-keyword">for</span> e <span class="code-keyword">in</span> enrollments:
+    student = <span class="code-keyword">next</span>(s <span class="code-keyword">for</span> s <span class="code-keyword">in</span> students <span class="code-keyword">if</span> s[<span class="code-string">"student_id"</span>] == e[<span class="code-string">"student_id"</span>])
+    course = <span class="code-keyword">next</span>(c <span class="code-keyword">for</span> c <span class="code-keyword">in</span> courses <span class="code-keyword">if</span> c[<span class="code-string">"course_id"</span>] == e[<span class="code-string">"course_id"</span>])
+    <span class="code-function">print</span>(<span class="code-string">f"  {student['name']} 选修 {course['name']} 成绩：{e['grade']}分"</span>)
+
+<span class="code-comment"># 统计每个学生的平均成绩</span>
+<span class="code-function">print</span>(<span class="code-string">"\n学生平均成绩："</span>)
+<span class="code-keyword">for</span> student <span class="code-keyword">in</span> students:
+    grades = [e[<span class="code-string">"grade"</span>] <span class="code-keyword">for</span> e <span class="code-keyword">in</span> enrollments <span class="code-keyword">if</span> e[<span class="code-string">"student_id"</span>] == student[<span class="code-string">"student_id"</span>]]
+    avg_grade = <span class="code-function">sum</span>(grades) / <span class="code-function">len</span>(grades)
+    <span class="code-function">print</span>(<span class="code-string">f"  {student['name']}: {avg_grade:.1f}分"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 综合代码编辑器 -->
+        <div class="mt-12 bg-white rounded-2xl shadow-xl p-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+                    <span class="text-3xl mr-3">🚀</span>
+                    综合代码编辑器
+                </h2>
+                <button onclick="runAllCode()" class="bg-gradient-to-r from-primary to-cyan-600 text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity flex items-center">
+                    <i class="fa fa-play mr-2"></i>
+                    运行全部代码
+                </button>
+            </div>
+            
+            <p class="text-gray-600 mb-4">
+                将上面示例中的代码复制到下方编辑器中，点击"运行全部代码"查看结果：
+            </p>
+            
+            <div class="mb-4">
+                <div id="main-editor" class="rounded-lg overflow-hidden border-2 border-gray-200" style="height: 400px;"></div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold text-gray-700 mb-3 flex items-center">
+                    <span class="mr-2">📤</span> 运行结果
+                </h3>
+                <div id="output-area" class="output-box">
+                    <p class="text-gray-400 text-center">点击"运行全部代码"按钮查看输出结果</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-gray-400">© 2026 郑利娜 - 广东科学技术职业学院 · 商务数据分析与应用专业</p>
+        </div>
+    </footer>
+
+    <script>
+        // 初始化主编辑器
+        const editor = ace.edit("main-editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/python");
+        editor.setFontSize(14);
+        editor.setShowPrintMargin(false);
+
+        // 默认代码
+        editor.setValue(`# 数据库原理与应用 - 综合练习
+# 在下方编写你的代码，点击"运行全部代码"执行
+
+# 示例：数据库表操作
+students = [
+    {"id": 1, "name": "张三", "age": 20, "major": "计算机"},
+    {"id": 2, "name": "李四", "age": 21, "major": "数学"},
+    {"id": 3, "name": "王五", "age": 19, "major": "物理"}
+]
+
+print("学生表数据：")
+print("="*50)
+for s in students:
+    print(f"  {s['id']} | {s['name']} | {s['age']}岁 | {s['major']}")
+
+# 示例：条件查询
+print("\\n年龄大于20的学生：")
+older_students = [s for s in students if s['age'] > 20]
+for s in older_students:
+    print(f"  {s['name']}: {s['age']}岁")
+
+# 示例：聚合计算
+ages = [s['age'] for s in students]
+print(f"\\n平均年龄：{sum(ages)/len(ages):.1f}岁")
+`, -1);
+
+        // 显示指定模块
+        function showModule(num) {
+            document.querySelectorAll('.module-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            const module = document.getElementById(`module-${num}`);
+            if (module) {
+                module.classList.remove('hidden');
+                module.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // 运行代码
+        function runAllCode() {
+            const code = editor.getValue();
+            const outputArea = document.getElementById('output-area');
+            
+            outputArea.innerHTML = '<p class="text-primary"><i class="fa fa-spinner fa-spin mr-2"></i>正在运行...</p>';
+            
+            try {
+                const outputs = [];
+                
+                const originalLog = console.log;
+                console.log = function(...args) {
+                    outputs.push(args.map(arg => {
+                        if (typeof arg === 'object') {
+                            return JSON.stringify(arg);
+                        }
+                        return String(arg);
+                    }).join(' '));
+                };
+                
+                eval(code);
+                
+                console.log = originalLog;
+                
+                if (outputs.length > 0) {
+                    outputArea.innerHTML = `
+                        <div class="space-y-2">
+                            ${outputs.map(line => `
+                                <div class="bg-white p-3 rounded-lg border border-gray-200 font-mono text-sm">
+                                    <span class="text-gray-500 mr-2">></span>${line}
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                } else {
+                    outputArea.innerHTML = '<p class="text-green-600"><i class="fa fa-check-circle mr-2"></i>代码执行成功（无输出）</p>';
+                }
+            } catch (error) {
+                outputArea.innerHTML = `
+                    <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                        <p class="text-red-600 font-semibold mb-2"><i class="fa fa-times-circle mr-2"></i>运行错误</p>
+                        <p class="text-red-500 font-mono text-sm">${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        showModule(1);
+    </script>
+</body>
+</html>

@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>课程练习 - 郑利娜老师个人页面</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a56db',
+                        secondary: '#f3f4f6',
+                        dark: '#374151',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+        }
+        .ace_editor {
+            border-radius: 0.5rem;
+            height: 300px;
+        }
+        .exercise-card {
+            @apply bg-white rounded-xl shadow-md p-6 mb-6;
+        }
+        .difficulty-badge {
+            @apply px-3 py-1 rounded-full text-xs font-semibold;
+        }
+        .difficulty-easy {
+            @apply bg-green-100 text-green-800;
+        }
+        .difficulty-medium {
+            @apply bg-yellow-100 text-yellow-800;
+        }
+        .difficulty-hard {
+            @apply bg-red-100 text-red-800;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="text-primary font-bold text-xl">郑利娜 - 个人页面</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="../index.html#about" class="text-dark hover:text-primary transition-colors">关于我</a>
+                <a href="../index.html#courses" class="text-dark hover:text-primary transition-colors">课程信息</a>
+                <a href="../index.html#contact" class="text-dark hover:text-primary transition-colors">联系方式</a>
+            </div>
+            <button class="md:hidden text-dark">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-start justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-dark mb-2">课程练习</h1>
+                    <p class="text-gray-600">学练测评一体化学习体验</p>
+                </div>
+                <a href="../index.html#courses" class="mt-4 md:mt-0 bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回课程列表
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 练习系统介绍 -->
+    <section class="py-10 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="container mx-auto px-4">
+            <div class="bg-white rounded-2xl shadow-xl p-8 border-l-4 border-primary">
+                <h2 class="text-2xl font-bold text-dark mb-4">练习系统介绍</h2>
+                <p class="text-gray-700 mb-6">
+                    本练习系统提供了各课程的练习题，包括选择题、填空题和编程题。通过完成这些练习，你可以巩固所学知识，提高编程能力。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-secondary rounded-lg p-6 text-center">
+                        <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa fa-code text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-dark mb-2">在线编程</h3>
+                        <p class="text-gray-600">直接在浏览器中编写和运行代码</p>
+                    </div>
+                    <div class="bg-secondary rounded-lg p-6 text-center">
+                        <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa fa-check-circle text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-dark mb-2">自动评分</h3>
+                        <p class="text-gray-600">提交代码后立即获得评分反馈</p>
+                    </div>
+                    <div class="bg-secondary rounded-lg p-6 text-center">
+                        <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa fa-lightbulb-o text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-dark mb-2">参考答案</h3>
+                        <p class="text-gray-600">查看参考答案，学习最佳实践</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 课程选择 -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-dark mb-6">选择课程</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="#python-basics" class="bg-white rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-python text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-dark">Python基础</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Python编程语言的基础知识和应用</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">10+ 练习题</span>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">查看练习</span>
+                    </div>
+                </a>
+                <a href="#data-analysis" class="bg-white rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-bar-chart text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-dark">数据分析技术</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">数据分析的方法和工具应用</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">10+ 练习题</span>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">查看练习</span>
+                    </div>
+                </a>
+                <a href="#data-collection" class="bg-white rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-database text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-dark">数据采集与处理</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">数据采集、清洗和预处理技术</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">10+ 练习题</span>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">查看练习</span>
+                    </div>
+                </a>
+                <a href="#supply-chain" class="bg-white rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-truck text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-dark">供应链数据分析</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">供应链管理中的数据分析应用</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">5+ 练习题</span>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">查看练习</span>
+                    </div>
+                </a>
+                <a href="#database" class="bg-white rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-table text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-dark">数据库原理与应用</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">数据库设计和SQL查询技术</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">5+ 练习题</span>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">查看练习</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Python基础练习题 -->
+    <section id="python-basics" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-dark mb-6">Python基础练习题</h2>
+            
+            <!-- 练习1 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习1：计算两个数的和</h3>
+                    <span class="difficulty-badge difficulty-easy">简单</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，接收两个数字参数，返回它们的和。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-1" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(1)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(1)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-1" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-1" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def add_numbers(a, b):
+    return a + b
+
+# 测试
+print(add_numbers(5, 3))  # 输出：8
+print(add_numbers(10, -2))  # 输出：8</pre>
+                </div>
+            </div>
+
+            <!-- 练习2 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习2：判断素数</h3>
+                    <span class="difficulty-badge difficulty-medium">中等</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，判断一个数是否为素数。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-2" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(2)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(2)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-2" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-2" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def is_prime(n):
+    if n <= 1:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+# 测试
+print(is_prime(7))  # 输出：True
+print(is_prime(10))  # 输出：False</pre>
+                </div>
+            </div>
+
+            <!-- 练习3 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习3：列表排序</h3>
+                    <span class="difficulty-badge difficulty-easy">简单</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，对列表进行排序（从小到大）。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-3" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(3)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(3)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-3" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-3" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def sort_list(lst):
+    return sorted(lst)
+
+# 测试
+print(sort_list([3, 1, 4, 1, 5, 9, 2, 6]))  # 输出：[1, 1, 2, 3, 4, 5, 6, 9]</pre>
+                </div>
+            </div>
+
+            <!-- 练习4 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习4：字符串反转</h3>
+                    <span class="difficulty-badge difficulty-easy">简单</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，反转字符串。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-4" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(4)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(4)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-4" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-4" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def reverse_string(s):
+    return s[::-1]
+
+# 测试
+print(reverse_string("hello"))  # 输出：olleh
+print(reverse_string("Python"))  # 输出：nohtyP</pre>
+                </div>
+            </div>
+
+            <!-- 练习5 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习5：计算阶乘</h3>
+                    <span class="difficulty-badge difficulty-medium">中等</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，计算一个数的阶乘。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-5" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(5)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(5)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-5" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-5" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def factorial(n):
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return n * factorial(n-1)
+
+# 测试
+print(factorial(5))  # 输出：120
+print(factorial(10))  # 输出：3628800</pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 数据分析技术练习题 -->
+    <section id="data-analysis" class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-dark mb-6">数据分析技术练习题</h2>
+            
+            <!-- 练习1 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习1：数据清洗</h3>
+                    <span class="difficulty-badge difficulty-medium">中等</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，处理列表中的缺失值（用0填充）。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-6" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(6)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(6)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-6" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-6" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def fill_missing_values(data):
+    return [0 if x is None else x for x in data]
+
+# 测试
+data = [1, None, 3, None, 5]
+print(fill_missing_values(data))  # 输出：[1, 0, 3, 0, 5]</pre>
+                </div>
+            </div>
+
+            <!-- 练习2 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习2：计算平均值</h3>
+                    <span class="difficulty-badge difficulty-easy">简单</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，计算列表中数字的平均值。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-7" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(7)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(7)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-7" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-7" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def calculate_average(data):
+    if not data:
+        return 0
+    return sum(data) / len(data)
+
+# 测试
+data = [1, 2, 3, 4, 5]
+print(calculate_average(data))  # 输出：3.0</pre>
+                </div>
+            </div>
+
+            <!-- 练习3 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习3：数据分组</h3>
+                    <span class="difficulty-badge difficulty-medium">中等</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，根据字典的键值对数据进行分组。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-8" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(8)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(8)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-8" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-8" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def group_by_key(data, key):
+    grouped = {}
+    for item in data:
+        group_key = item.get(key)
+        if group_key not in grouped:
+            grouped[group_key] = []
+        grouped[group_key].append(item)
+    return grouped
+
+# 测试
+data = [
+    {"name": "Alice", "age": 25, "gender": "female"},
+    {"name": "Bob", "age": 30, "gender": "male"},
+    {"name": "Charlie", "age": 35, "gender": "male"},
+    {"name": "Diana", "age": 28, "gender": "female"}
+]
+print(group_by_key(data, "gender"))
+# 输出：
+# {
+#     "female": [{"name": "Alice", "age": 25, "gender": "female"}, {"name": "Diana", "age": 28, "gender": "female"}],
+#     "male": [{"name": "Bob", "age": 30, "gender": "male"}, {"name": "Charlie", "age": 35, "gender": "male"}]
+# }</pre>
+                </div>
+            </div>
+
+            <!-- 练习4 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习4：异常值检测</h3>
+                    <span class="difficulty-badge difficulty-hard">困难</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，使用IQR方法检测并移除异常值。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-9" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(9)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(9)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-9" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-9" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def remove_outliers(data):
+    sorted_data = sorted(data)
+    n = len(sorted_data)
+    q1 = sorted_data[n//4]
+    q3 = sorted_data[3*n//4]
+    iqr = q3 - q1
+    lower_bound = q1 - 1.5 * iqr
+    upper_bound = q3 + 1.5 * iqr
+    return [x for x in data if lower_bound <= x <= upper_bound]
+
+# 测试
+data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 100]  # 100是异常值
+print(remove_outliers(data))  # 输出：[1, 2, 3, 4, 5, 6, 7, 8, 9]</pre>
+                </div>
+            </div>
+
+            <!-- 练习5 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习5：简单线性回归</h3>
+                    <span class="difficulty-badge difficulty-medium">中等</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，实现简单线性回归（计算斜率和截距）。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-10" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(10)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(10)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-10" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-10" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def linear_regression(x, y):
+    n = len(x)
+    sum_x = sum(x)
+    sum_y = sum(y)
+    sum_xy = sum(x[i] * y[i] for i in range(n))
+    sum_x2 = sum(x[i] ** 2 for i in range(n))
+    
+    slope = (n * sum_xy - sum_x * sum_y) / (n * sum_x2 - sum_x ** 2)
+    intercept = (sum_y - slope * sum_x) / n
+    
+    return slope, intercept
+
+# 测试
+x = [1, 2, 3, 4, 5]
+y = [2, 4, 6, 8, 10]
+slope, intercept = linear_regression(x, y)
+print(f"斜率: {slope}, 截距: {intercept}")  # 输出：斜率: 2.0, 截距: 0.0</pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 数据采集与处理练习题 -->
+    <section id="data-collection" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-dark mb-6">数据采集与处理练习题</h2>
+            
+            <!-- 练习1 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习1：正则表达式提取</h3>
+                    <span class="difficulty-badge difficulty-medium">中等</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，使用正则表达式从字符串中提取邮箱地址。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-11" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(11)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(11)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-11" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-11" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">import re
+
+def extract_emails(text):
+    pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+    return re.findall(pattern, text)
+
+# 测试
+text = "联系我：zhangsan@example.com 或 lisi@test.com"
+print(extract_emails(text))  # 输出：['zhangsan@example.com', 'lisi@test.com']</pre>
+                </div>
+            </div>
+
+            <!-- 练习2 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习2：CSV文件读取</h3>
+                    <span class="difficulty-badge difficulty-easy">简单</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，读取CSV文件并返回数据列表。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-12" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(12)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(12)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-12" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-12" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">import csv
+
+def read_csv(filename):
+    data = []
+    with open(filename, 'r', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            data.append(row)
+    return data
+
+# 测试
+# 假设存在一个data.csv文件
+# data = read_csv('data.csv')
+# print(data)</pre>
+                </div>
+            </div>
+
+            <!-- 练习3 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习3：数据转换</h3>
+                    <span class="difficulty-badge difficulty-medium">中等</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，将列表中的字符串转换为数字。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-13" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(13)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(13)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-13" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-13" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def convert_to_numbers(strings):
+    numbers = []
+    for s in strings:
+        try:
+            numbers.append(float(s))
+        except ValueError:
+            numbers.append(None)
+    return numbers
+
+# 测试
+strings = ["1", "2.5", "3", "abc"]
+print(convert_to_numbers(strings))  # 输出：[1.0, 2.5, 3.0, None]</pre>
+                </div>
+            </div>
+
+            <!-- 练习4 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习4：数据去重</h3>
+                    <span class="difficulty-badge difficulty-easy">简单</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，移除列表中的重复元素。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-14" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(14)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(14)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-14" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-14" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def remove_duplicates(lst):
+    return list(set(lst))
+
+# 测试
+lst = [1, 2, 3, 2, 1, 4, 5, 4]
+print(remove_duplicates(lst))  # 输出：[1, 2, 3, 4, 5]（顺序可能不同）</pre>
+                </div>
+            </div>
+
+            <!-- 练习5 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习5：简单爬虫</h3>
+                    <span class="difficulty-badge difficulty-hard">困难</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，使用requests和BeautifulSoup爬取网页标题。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-15" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(15)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(15)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-15" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-15" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">import requests
+from bs4 import BeautifulSoup
+
+def get_page_title(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.text, 'html.parser')
+        title = soup.title.string if soup.title else "No title found"
+        return title
+    except Exception as e:
+        return f"Error: {str(e)}"
+
+# 测试
+# print(get_page_title("https://www.example.com"))</pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 供应链数据分析练习题 -->
+    <section id="supply-chain" class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-dark mb-6">供应链数据分析练习题</h2>
+            
+            <!-- 练习1 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习1：库存周转率计算</h3>
+                    <span class="difficulty-badge difficulty-medium">中等</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，计算库存周转率。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-16" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(16)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(16)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-16" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-16" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def calculate_inventory_turnover(cost_of_goods_sold, average_inventory):
+    if average_inventory == 0:
+        return 0
+    return cost_of_goods_sold / average_inventory
+
+# 测试
+cogs = 100000
+avg_inventory = 25000
+print(calculate_inventory_turnover(cogs, avg_inventory))  # 输出：4.0</pre>
+                </div>
+            </div>
+
+            <!-- 练习2 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习2：订单处理时间计算</h3>
+                    <span class="difficulty-badge difficulty-easy">简单</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，计算订单处理时间（从下单到发货的时间）。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-17" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(17)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(17)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-17" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-17" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">from datetime import datetime
+
+def calculate_processing_time(order_date, ship_date):
+    order_dt = datetime.strptime(order_date, "%Y-%m-%d")
+    ship_dt = datetime.strptime(ship_date, "%Y-%m-%d")
+    return (ship_dt - order_dt).days
+
+# 测试
+order_date = "2023-01-01"
+ship_date = "2023-01-05"
+print(calculate_processing_time(order_date, ship_date))  # 输出：4</pre>
+                </div>
+            </div>
+
+            <!-- 练习3 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习3：供应商绩效评分</h3>
+                    <span class="difficulty-badge difficulty-medium">中等</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，根据多个指标计算供应商绩效评分。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-18" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(18)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(18)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-18" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-18" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def calculate_supplier_score(on_time_delivery, quality_rate, cost_efficiency, responsiveness):
+    # 权重
+    weights = {
+        "on_time_delivery": 0.3,
+        "quality_rate": 0.3,
+        "cost_efficiency": 0.2,
+        "responsiveness": 0.2
+    }
+    
+    score = (
+        on_time_delivery * weights["on_time_delivery"] +
+        quality_rate * weights["quality_rate"] +
+        cost_efficiency * weights["cost_efficiency"] +
+        responsiveness * weights["responsiveness"]
+    )
+    
+    return round(score, 2)
+
+# 测试
+score = calculate_supplier_score(0.95, 0.98, 0.85, 0.90)
+print(score)  # 输出：0.94</pre>
+                </div>
+            </div>
+
+            <!-- 练习4 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习4：需求预测</h3>
+                    <span class="difficulty-badge difficulty-hard">困难</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，使用移动平均法进行简单的需求预测。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-19" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(19)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(19)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-19" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-19" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def moving_average_forecast(data, window_size):
+    if len(data) < window_size:
+        return None
+    
+    forecast = sum(data[-window_size:]) / window_size
+    return forecast
+
+# 测试
+demand_data = [100, 120, 110, 130, 125, 140, 135]
+window_size = 3
+forecast = moving_average_forecast(demand_data, window_size)
+print(forecast)  # 输出：133.33333333333334</pre>
+                </div>
+            </div>
+
+            <!-- 练习5 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习5：运输成本计算</h3>
+                    <span class="difficulty-badge difficulty-easy">简单</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，根据距离和重量计算运输成本。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-20" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(20)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(20)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-20" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-20" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def calculate_shipping_cost(distance, weight):
+    # 基础成本
+    base_cost = 10
+    # 距离成本（每公里）
+    distance_cost_per_km = 0.5
+    # 重量成本（每公斤）
+    weight_cost_per_kg = 2
+    
+    total_cost = base_cost + (distance * distance_cost_per_km) + (weight * weight_cost_per_kg)
+    return round(total_cost, 2)
+
+# 测试
+distance = 100  # 公里
+weight = 20  # 公斤
+print(calculate_shipping_cost(distance, weight))  # 输出：100.0</pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 数据库原理与应用练习题 -->
+    <section id="database" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-dark mb-6">数据库原理与应用练习题</h2>
+            
+            <!-- 练习1 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习1：SQL查询构建</h3>
+                    <span class="difficulty-badge difficulty-medium">中等</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，根据用户输入构建SELECT查询语句。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-21" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(21)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(21)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-21" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-21" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def build_select_query(table, columns, where_clause=None):
+    columns_str = ", ".join(columns)
+    query = f"SELECT {columns_str} FROM {table}"
+    
+    if where_clause:
+        query += f" WHERE {where_clause}"
+    
+    return query
+
+# 测试
+query = build_select_query(
+    table="users",
+    columns=["id", "name", "email"],
+    where_clause="age > 18"
+)
+print(query)  # 输出：SELECT id, name, email FROM users WHERE age > 18</pre>
+                </div>
+            </div>
+
+            <!-- 练习2 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习2：数据验证</h3>
+                    <span class="difficulty-badge difficulty-easy">简单</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，验证电子邮件地址格式是否正确。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-22" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(22)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(22)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-22" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-22" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">import re
+
+def validate_email(email):
+    pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+    return bool(re.match(pattern, email))
+
+# 测试
+print(validate_email("user@example.com"))  # 输出：True
+print(validate_email("invalid-email"))  # 输出：False</pre>
+                </div>
+            </div>
+
+            <!-- 练习3 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习3：数据库连接字符串构建</h3>
+                    <span class="difficulty-badge difficulty-medium">中等</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，根据参数构建数据库连接字符串。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-23" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(23)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(23)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-23" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-23" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def build_connection_string(host, port, database, user, password):
+    return f"postgresql://{user}:{password}@{host}:{port}/{database}"
+
+# 测试
+conn_str = build_connection_string(
+    host="localhost",
+    port=5432,
+    database="mydb",
+    user="admin",
+    password="password"
+)
+print(conn_str)  # 输出：postgresql://admin:password@localhost:5432/mydb</pre>
+                </div>
+            </div>
+
+            <!-- 练习4 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习4：SQL注入防护</h3>
+                    <span class="difficulty-badge difficulty-hard">困难</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，使用参数化查询防止SQL注入。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-24" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(24)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(24)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-24" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-24" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def safe_query(user_id):
+    # 使用参数化查询
+    query = "SELECT * FROM users WHERE id = %s"
+    # 实际使用时，会将参数传递给数据库驱动
+    # cursor.execute(query, (user_id,))
+    return query
+
+# 测试
+print(safe_query(1))  # 输出：SELECT * FROM users WHERE id = %s
+print(safe_query("1' OR 1=1--"))  # 输出：SELECT * FROM users WHERE id = %s</pre>
+                </div>
+            </div>
+
+            <!-- 练习5 -->
+            <div class="exercise-card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-dark">练习5：事务处理</h3>
+                    <span class="difficulty-badge difficulty-medium">中等</span>
+                </div>
+                <p class="text-gray-700 mb-4">编写一个Python函数，演示数据库事务处理。</p>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">代码编辑器</label>
+                    <div id="code-editor-25" class="ace_editor"></div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="runCode(25)" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-play mr-2"></i> 运行
+                    </button>
+                    <button onclick="showAnswer(25)" class="bg-gray-200 text-dark px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                        <i class="fa fa-eye mr-2"></i> 查看答案
+                    </button>
+                </div>
+                <div id="result-25" class="mt-4 p-4 rounded-lg hidden"></div>
+                <div id="answer-25" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                    <h4 class="font-semibold text-dark mb-2">参考答案：</h4>
+                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">def transfer_money(conn, from_account, to_account, amount):
+    try:
+        # 开始事务
+        cursor = conn.cursor()
+        
+        # 扣除转出账户
+        cursor.execute("UPDATE accounts SET balance = balance - %s WHERE id = %s", (amount, from_account))
+        
+        # 增加转入账户
+        cursor.execute("UPDATE accounts SET balance = balance + %s WHERE id = %s", (amount, to_account))
+        
+        # 提交事务
+        conn.commit()
+        return True
+    except Exception as e:
+        # 回滚事务
+        conn.rollback()
+        print(f"Error: {str(e)}")
+        return False
+
+# 测试
+# 假设存在一个数据库连接
+# conn = get_db_connection()
+# transfer_money(conn, 1, 2, 100)</pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2026 郑利娜 - 广东科学技术职业学院</p>
+            <p class="mt-2 text-gray-400">商务数据分析与应用专业</p>
+        </div>
+    </footer>
+
+    <script>
+        // 简单的响应式导航
+        const menuButton = document.querySelector('nav button');
+        if (menuButton) {
+            menuButton.addEventListener('click', function() {
+                const navLinks = document.querySelector('nav .md\\:flex');
+                if (navLinks) {
+                    navLinks.classList.toggle('hidden');
+                }
+            });
+        }
+
+        // 初始化代码编辑器
+        const editors = [];
+        for (let i = 1; i <= 25; i++) {
+            const editor = ace.edit(`code-editor-${i}`);
+            editor.setTheme('ace/theme/monokai');
+            editor.getSession().setMode('ace/mode/python');
+            editor.setOptions({
+                fontSize: '14px',
+                tabSize: 4,
+                useSoftTabs: true,
+                wrap: true
+            });
+            editors.push(editor);
+        }
+
+        // 运行代码函数
+        function runCode(index) {
+            const editor = editors[index - 1];
+            const code = editor.getValue();
+            const resultDiv = document.getElementById(`result-${index}`);
+            
+            // 模拟代码运行
+            try {
+                // 这里只是简单的模拟，实际运行需要服务器端支持
+                resultDiv.innerHTML = `<div class="bg-green-100 text-green-800 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">运行结果：</h4>
+                    <pre class="whitespace-pre-wrap">代码已执行，这是模拟的运行结果。在实际环境中，代码会在服务器端运行并返回真实结果。</pre>
+                </div>`;
+                resultDiv.classList.remove('hidden');
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="bg-red-100 text-red-800 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">运行错误：</h4>
+                    <pre class="whitespace-pre-wrap">${error.message}</pre>
+                </div>`;
+                resultDiv.classList.remove('hidden');
+            }
+        }
+
+        // 显示答案函数
+        function showAnswer(index) {
+            const answerDiv = document.getElementById(`answer-${index}`);
+            answerDiv.classList.toggle('hidden');
+        }
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

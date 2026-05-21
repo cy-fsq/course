@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python基础在线学习 - 郑利娜老师</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#f1f5f9',
+                    },
+                },
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+        .knowledge-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 4px solid #6366f1;
+        }
+        .code-block {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 12px 0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+        .code-keyword { color: #c678dd; }
+        .code-string { color: #98c379; }
+        .code-number { color: #d19a66; }
+        .code-function { color: #61afef; }
+        .code-comment { color: #5c6370; }
+        .output-box {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 100px;
+        }
+        .difficulty-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .difficulty-easy { background: #dcfce7; color: #166534; }
+        .difficulty-medium { background: #fef9c3; color: #854d0e; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 顶部导航 -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <i class="fa fa-arrow-left text-primary text-xl"></i>
+                <span class="text-gray-600">返回主页</span>
+            </a>
+            <h1 class="text-xl font-bold text-gray-800">Python基础</h1>
+            <div class="text-primary font-medium">在线学习</div>
+        </div>
+    </nav>
+
+    <!-- Hero区域 -->
+    <section class="gradient-bg text-white py-16">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-4">🐍 Python 基础在线学习</h1>
+            <p class="text-xl opacity-90 mb-8">7个核心知识点 · 在线代码编辑器 · 边学边练</p>
+            <div class="flex justify-center space-x-6 text-sm">
+                <div class="flex items-center">
+                    <i class="fa fa-code mr-2"></i>
+                    <span>在线运行代码</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fa fa-clock-o mr-2"></i>
+                    <span>约60分钟</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fa fa-star mr-2"></i>
+                    <span>7个核心知识点</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 课程内容 -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <!-- 知识模块选择 -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">📚 选择学习模块</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <button onclick="showModule(1)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">📝</div>
+                    <div class="font-semibold text-gray-800">第1节</div>
+                    <div class="text-sm text-gray-500">变量与数据类型</div>
+                </button>
+                <button onclick="showModule(2)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">🔄</div>
+                    <div class="font-semibold text-gray-800">第2节</div>
+                    <div class="text-sm text-gray-500">条件判断</div>
+                </button>
+                <button onclick="showModule(3)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">🔁</div>
+                    <div class="font-semibold text-gray-800">第3节</div>
+                    <div class="text-sm text-gray-500">循环结构</div>
+                </button>
+                <button onclick="showModule(4)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">📦</div>
+                    <div class="font-semibold text-gray-800">第4节</div>
+                    <div class="text-sm text-gray-500">列表与元组</div>
+                </button>
+                <button onclick="showModule(5)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">🗺️</div>
+                    <div class="font-semibold text-gray-800">第5节</div>
+                    <div class="text-sm text-gray-500">字典操作</div>
+                </button>
+                <button onclick="showModule(6)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">⚙️</div>
+                    <div class="font-semibold text-gray-800">第6节</div>
+                    <div class="text-sm text-gray-500">函数定义</div>
+                </button>
+                <button onclick="showModule(7)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">📁</div>
+                    <div class="font-semibold text-gray-800">第7节</div>
+                    <div class="text-sm text-gray-500">文件操作</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- 第1节：变量与数据类型 -->
+        <div id="module-1" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">1</span>
+                    变量与数据类型
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        变量是存储数据的容器，Python支持多种数据类型：整数(int)、浮点数(float)、字符串(str)、布尔值(bool)。
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-2">整数 (int)</div>
+                            <code class="text-blue-600">x = 10</code>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-2">浮点数 (float)</div>
+                            <code class="text-green-600">y = 3.14</code>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg">
+                            <div class="font-semibold text-purple-800 mb-2">字符串 (str)</div>
+                            <code class="text-purple-600">name = "Python"</code>
+                        </div>
+                        <div class="bg-orange-50 p-4 rounded-lg">
+                            <div class="font-semibold text-orange-800 mb-2">布尔值 (bool)</div>
+                            <code class="text-orange-600">is_active = True</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 变量赋值与数据类型</span>
+<span class="code-variable">name</span> = <span class="code-string">"小明"</span>
+<span class="code-variable">age</span> = <span class="code-number">18</span>
+<span class="code-variable">height</span> = <span class="code-number">1.75</span>
+<span class="code-variable">is_student</span> = <span class="code-keyword">True</span>
+
+<span class="code-function">print</span>(<span class="code-string">f"姓名：{name}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"年龄：{age}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"身高：{height}米"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"是否学生：{is_student}"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第2节：条件判断 -->
+        <div id="module-2" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">2</span>
+                    条件判断
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        条件判断使用 if、elif、else 关键字，让程序根据不同条件执行不同的代码块。
+                    </p>
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <div class="font-semibold text-gray-700 mb-2">基本语法：</div>
+                        <div class="code-block text-sm">
+<span class="code-keyword">if</span> 条件1:
+    <span class="code-comment"># 条件1为True时执行</span>
+<span class="code-keyword">elif</span> 条件2:
+    <span class="code-comment"># 条件2为True时执行</span>
+<span class="code-keyword">else</span>:
+    <span class="code-comment"># 所有条件都不满足时执行</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 成绩评级系统</span>
+<span class="code-variable">score</span> = <span class="code-number">85</span>
+
+<span class="code-keyword">if</span> score >= <span class="code-number">90</span>:
+    <span class="code-function">print</span>(<span class="code-string">"成绩等级：A"</span>)
+<span class="code-keyword">elif</span> score >= <span class="code-number">80</span>:
+    <span class="code-function">print</span>(<span class="code-string">"成绩等级：B"</span>)
+<span class="code-keyword">elif</span> score >= <span class="code-number">60</span>:
+    <span class="code-function">print</span>(<span class="code-string">"成绩等级：C"</span>)
+<span class="code-keyword">else</span>:
+    <span class="code-function">print</span>(<span class="code-string">"成绩等级：D（需补考）"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第3节：循环结构 -->
+        <div id="module-3" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">3</span>
+                    循环结构
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        循环用于重复执行代码块。Python有两种循环：for循环（遍历序列）和while循环（条件为真时重复）。
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-2">for循环</div>
+                            <code class="text-blue-600">for i in range(5):</code>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-2">while循环</div>
+                            <code class="text-green-600">while i < 5:</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># for循环：遍历列表</span>
+<span class="code-variable">fruits</span> = [<span class="code-string">"苹果"</span>, <span class="code-string">"香蕉"</span>, <span class="code-string">"橙子"</span>]
+
+<span class="code-keyword">for</span> fruit <span class="code-keyword">in</span> fruits:
+    <span class="code-function">print</span>(<span class="code-string">f"我喜欢吃：{fruit}"</span>)
+
+<span class="code-comment"># while循环：计算累加</span>
+<span class="code-variable">total</span> = <span class="code-number">0</span>
+<span class="code-variable">i</span> = <span class="code-number">1</span>
+<span class="code-keyword">while</span> i <= <span class="code-number">5</span>:
+    total += i
+    i += <span class="code-number">1</span>
+<span class="code-function">print</span>(<span class="code-string">f"1+2+3+4+5 = {total}"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第4节：列表与元组 -->
+        <div id="module-4" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">4</span>
+                    列表与元组
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        列表(list)是可变的有序序列，用方括号表示；元组(tuple)是不可变的有序序列，用圆括号表示。
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-2">列表 [可变]</div>
+                            <code class="text-blue-600">nums = [1, 2, 3]</code>
+                            <div class="text-sm text-blue-600 mt-1">可以添加、删除、修改元素</div>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-2">元组 [不可变]</div>
+                            <code class="text-green-600">coords = (10, 20)</code>
+                            <div class="text-sm text-green-600 mt-1">创建后不能修改，更安全</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 列表操作</span>
+<span class="code-variable">numbers</span> = [<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>, <span class="code-number">4</span>, <span class="code-number">5</span>]
+<span class="code-function">print</span>(<span class="code-string">f"原列表：{numbers}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"第一个元素：{numbers[0]}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"最后三个：{numbers[-3:]}"</span>)
+<span class="code-variable">numbers</span>.<span class="code-function">append</span>(<span class="code-number">6</span>)
+<span class="code-function">print</span>(<span class="code-string">f"添加6后：{numbers}"</span>)
+
+<span class="code-comment"># 元组操作</span>
+<span class="code-variable">point</span> = (<span class="code-number">10</span>, <span class="code-number">20</span>)
+<span class="code-function">print</span>(<span class="code-string">f"坐标点：{point}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"X坐标：{point[0]}"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第5节：字典操作 -->
+        <div id="module-5" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">5</span>
+                    字典操作
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        字典(dict)是一种键值对(key-value)的数据结构，用大括号表示，可以通过键快速访问值。
+                    </p>
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <div class="font-semibold text-purple-800 mb-2">基本语法</div>
+                        <code class="text-purple-600">student = {"name": "张三", "age": 18}</code>
+                        <div class="text-sm text-purple-600 mt-1">通过键访问：student["name"] → "张三"</div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 字典的创建和访问</span>
+<span class="code-variable">student</span> = {
+    <span class="code-string">"name"</span>: <span class="code-string">"小明"</span>,
+    <span class="code-string">"age"</span>: <span class="code-number">18</span>,
+    <span class="code-string">"grade"</span>: <span class="code-string">"高二"</span>
+}
+
+<span class="code-function">print</span>(<span class="code-string">f"姓名：{student['name']}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"年龄：{student['age']}"</span>)
+
+<span class="code-comment"># 添加和修改</span>
+student[<span class="code-string">"score"</span>] = <span class="code-number">95</span>
+student[<span class="code-string">"age"</span>] = <span class="code-number">19</span>
+<span class="code-function">print</span>(<span class="code-string">f"更新后：{student}"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第6节：函数定义 -->
+        <div id="module-6" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">6</span>
+                    函数定义
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        函数是组织代码的基本单元，使用def关键字定义。函数可以接收参数，执行特定任务，并返回结果。
+                    </p>
+                    <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                        <div class="font-semibold text-blue-800 mb-2">函数基本结构</div>
+                        <div class="code-block text-sm">
+<span class="code-keyword">def</span> <span class="code-function">函数名</span>(参数):
+    <span class="code-string">"""函数说明文档"""</span>
+    <span class="code-comment"># 函数体</span>
+    <span class="code-keyword">return</span> 结果
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 定义计算面积的函数</span>
+<span class="code-keyword">def</span> <span class="code-function">calculate_area</span>(width, height):
+    <span class="code-string">"""计算矩形面积"""</span>
+    area = width * height
+    <span class="code-keyword">return</span> area
+
+<span class="code-comment"># 定义问候函数</span>
+<span class="code-keyword">def</span> <span class="code-function">greet</span>(name, greeting=<span class="code-string">"你好"</span>):
+    <span class="code-string">"""带默认参数的问候函数"""</span>
+    <span class="code-keyword">return</span> <span class="code-string">f"{greeting}，{name}！"</span>
+
+<span class="code-comment"># 调用函数</span>
+<span class="code-variable">result</span> = <span class="code-function">calculate_area</span>(<span class="code-number">5</span>, <span class="code-number">3</span>)
+<span class="code-function">print</span>(<span class="code-string">f"矩形面积：{result}"</span>)
+<span class="code-function">print</span>(<span class="code-function">greet</span>(<span class="code-string">"小明"</span>))
+<span class="code-function">print</span>(<span class="code-function">greet</span>(<span class="code-string">"小红"</span>, <span class="code-string">"早上好"</span>))
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第7节：文件操作 -->
+        <div id="module-7" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">7</span>
+                    文件操作
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        Python使用open()函数打开文件，使用with语句可以自动关闭文件，推荐使用这种方式。
+                    </p>
+                    <div class="grid gap-3 mb-4">
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <div class="font-semibold text-blue-800">读文件</div>
+                            <code class="text-blue-600">with open("file.txt", "r") as f:</code>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg">
+                            <div class="font-semibold text-green-800">写文件</div>
+                            <code class="text-green-600">with open("file.txt", "w") as f:</code>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg">
+                            <div class="font-semibold text-purple-800">追加内容</div>
+                            <code class="text-purple-600">with open("file.txt", "a") as f:</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 使用StringIO模拟文件操作（浏览器中运行）</span>
+<span class="code-keyword">from</span> io <span class="code-keyword">import</span> StringIO
+
+<span class="code-comment"># 写入数据</span>
+<span class="code-variable">output</span> = StringIO()
+<span class="code-variable">output</span>.<span class="code-function">write</span>(<span class="code-string">"第一行数据\n"</span>)
+<span class="code-variable">output</span>.<span class="code-function">write</span>(<span class="code-string">"第二行数据\n"</span>)
+<span class="code-variable">output</span>.<span class="code-function">write</span>(<span class="code-string">"第三行数据\n"</span>)
+
+<span class="code-comment"># 读取数据</span>
+<span class="code-variable">output</span>.<span class="code-function">seek</span>(<span class="code-number">0</span>)
+<span class="code-variable">content</span> = <span class="code-variable">output</span>.<span class="code-function">read</span>()
+<span class="code-function">print</span>(<span class="code-string">"文件内容："</span>)
+<span class="code-function">print</span>(content)
+
+<span class="code-comment"># 按行读取</span>
+<span class="code-variable">output</span>.<span class="code-function">seek</span>(<span class="code-number">0</span>)
+<span class="code-keyword">for</span> line <span class="code-keyword">in</span> <span class="code-variable">output</span>:
+    <span class="code-function">print</span>(<span class="code-string">f"读取行: {line.strip()}"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 综合代码编辑器 -->
+        <div class="mt-12 bg-white rounded-2xl shadow-xl p-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+                    <span class="text-3xl mr-3">🚀</span>
+                    综合代码编辑器
+                </h2>
+                <button onclick="runAllCode()" class="bg-gradient-to-r from-primary to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity flex items-center">
+                    <i class="fa fa-play mr-2"></i>
+                    运行全部代码
+                </button>
+            </div>
+            
+            <p class="text-gray-600 mb-4">
+                将上面示例中的代码复制到下方编辑器中，点击"运行全部代码"查看结果：
+            </p>
+            
+            <div class="mb-4">
+                <div id="main-editor" class="rounded-lg overflow-hidden border-2 border-gray-200" style="height: 400px;"></div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold text-gray-700 mb-3 flex items-center">
+                    <span class="mr-2">📤</span> 运行结果
+                </h3>
+                <div id="output-area" class="output-box">
+                    <p class="text-gray-400 text-center">点击"运行全部代码"按钮查看输出结果</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-gray-400">© 2026 郑利娜 - 广东科学技术职业学院 · 商务数据分析与应用专业</p>
+        </div>
+    </footer>
+
+    <script>
+        // 初始化主编辑器
+        const editor = ace.edit("main-editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/python");
+        editor.setFontSize(14);
+        editor.setShowPrintMargin(false);
+
+        // 默认代码
+        editor.setValue(`# Python基础 - 综合练习
+# 在下方编写你的代码，点击"运行全部代码"执行
+
+# 示例：变量与数据类型
+name = "小明"
+age = 18
+print(f"姓名：{name}, 年龄：{age}")
+
+# 示例：条件判断
+score = 85
+if score >= 90:
+    print("成绩等级：A")
+elif score >= 80:
+    print("成绩等级：B")
+else:
+    print("成绩等级：C")
+
+# 示例：循环
+for i in range(1, 4):
+    print(f"计数：{i}")
+
+# 示例：列表
+fruits = ["苹果", "香蕉", "橙子"]
+print(f"水果列表：{fruits}")
+
+# 示例：字典
+student = {"name": "张三", "age": 20}
+print(f"学生信息：{student}")
+`, -1);
+
+        // 显示指定模块
+        function showModule(num) {
+            // 隐藏所有模块
+            document.querySelectorAll('.module-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            // 显示指定模块
+            const module = document.getElementById(`module-${num}`);
+            if (module) {
+                module.classList.remove('hidden');
+                module.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // 运行代码
+        function runAllCode() {
+            const code = editor.getValue();
+            const outputArea = document.getElementById('output-area');
+            
+            // 显示加载状态
+            outputArea.innerHTML = '<p class="text-primary"><i class="fa fa-spinner fa-spin mr-2"></i>正在运行...</p>';
+            
+            try {
+                const outputs = [];
+                
+                // 重写console.log
+                const originalLog = console.log;
+                console.log = function(...args) {
+                    outputs.push(args.map(arg => {
+                        if (typeof arg === 'object') {
+                            return JSON.stringify(arg);
+                        }
+                        return String(arg);
+                    }).join(' '));
+                };
+                
+                // 执行代码
+                eval(code);
+                
+                // 恢复console.log
+                console.log = originalLog;
+                
+                // 显示结果
+                if (outputs.length > 0) {
+                    outputArea.innerHTML = `
+                        <div class="space-y-2">
+                            ${outputs.map(line => `
+                                <div class="bg-white p-3 rounded-lg border border-gray-200 font-mono text-sm">
+                                    <span class="text-gray-500 mr-2">&gt;</span>${line}
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                } else {
+                    outputArea.innerHTML = '<p class="text-green-600"><i class="fa fa-check-circle mr-2"></i>代码执行成功（无输出）</p>';
+                }
+            } catch (error) {
+                outputArea.innerHTML = `
+                    <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                        <p class="text-red-600 font-semibold mb-2"><i class="fa fa-times-circle mr-2"></i>运行错误</p>
+                        <p class="text-red-500 font-mono text-sm">${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // 默认显示第一个模块
+        showModule(1);
+    </script>
+</body>
+</html>

@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>供应链数据分析在线学习 - 郑利娜老师</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#f59e0b',
+                        secondary: '#f1f5f9',
+                    },
+                },
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+        .knowledge-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 4px solid #f59e0b;
+        }
+        .code-block {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 12px 0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+        .code-keyword { color: #c678dd; }
+        .code-string { color: #98c379; }
+        .code-number { color: #d19a66; }
+        .code-function { color: #61afef; }
+        .code-comment { color: #5c6370; }
+        .output-box {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 100px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 顶部导航 -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <i class="fa fa-arrow-left text-primary text-xl"></i>
+                <span class="text-gray-600">返回主页</span>
+            </a>
+            <h1 class="text-xl font-bold text-gray-800">供应链数据分析</h1>
+            <div class="text-primary font-medium">在线学习</div>
+        </div>
+    </nav>
+
+    <!-- Hero区域 -->
+    <section class="gradient-bg text-white py-16">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-4">📦 供应链数据分析在线学习</h1>
+            <p class="text-xl opacity-90 mb-8">7个核心知识点 · 供应链优化与决策 · 边学边练</p>
+            <div class="flex justify-center space-x-6 text-sm">
+                <div class="flex items-center">
+                    <i class="fa fa-code mr-2"></i>
+                    <span>在线运行代码</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fa fa-clock-o mr-2"></i>
+                    <span>约90分钟</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fa fa-star mr-2"></i>
+                    <span>7个核心知识点</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 课程内容 -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <!-- 知识模块选择 -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">📚 选择学习模块</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <button onclick="showModule(1)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">🏭</div>
+                    <div class="font-semibold text-gray-800">第1节</div>
+                    <div class="text-sm text-gray-500">供应链基础</div>
+                </button>
+                <button onclick="showModule(2)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">📊</div>
+                    <div class="font-semibold text-gray-800">第2节</div>
+                    <div class="text-sm text-gray-500">需求预测</div>
+                </button>
+                <button onclick="showModule(3)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">📦</div>
+                    <div class="font-semibold text-gray-800">第3节</div>
+                    <div class="text-sm text-gray-500">库存管理</div>
+                </button>
+                <button onclick="showModule(4)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">🚚</div>
+                    <div class="font-semibold text-gray-800">第4节</div>
+                    <div class="text-sm text-gray-500">物流优化</div>
+                </button>
+                <button onclick="showModule(5)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">🤝</div>
+                    <div class="font-semibold text-gray-800">第5节</div>
+                    <div class="text-sm text-gray-500">供应商评估</div>
+                </button>
+                <button onclick="showModule(6)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">💰</div>
+                    <div class="font-semibold text-gray-800">第6节</div>
+                    <div class="text-sm text-gray-500">成本分析</div>
+                </button>
+                <button onclick="showModule(7)" class="card-hover bg-white p-4 rounded-xl shadow border-2 border-transparent hover:border-primary">
+                    <div class="text-2xl mb-2">⚡</div>
+                    <div class="font-semibold text-gray-800">第7节</div>
+                    <div class="text-sm text-gray-500">绩效评估</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- 第1节：供应链基础 -->
+        <div id="module-1" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">1</span>
+                    供应链基础
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        供应链是围绕核心企业，通过对信息流、物流、资金流的控制，从采购原材料开始，制成中间产品及最终产品，最后由销售网络把产品送到消费者手中的功能网链结构。
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-4 mb-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-2">上游</div>
+                            <code class="text-blue-600">供应商</code>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-2">中游</div>
+                            <code class="text-green-600">制造商</code>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg">
+                            <div class="font-semibold text-purple-800 mb-2">下游</div>
+                            <code class="text-purple-600">分销商/零售商</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 供应链节点模拟</span>
+<span class="code-variable">supply_chain</span> = {
+    <span class="code-string">"供应商"</span>: [<span class="code-string">"原材料A"</span>, <span class="code-string">"原材料B"</span>],
+    <span class="code-string">"制造商"</span>: [<span class="code-string">"产品X"</span>, <span class="code-string">"产品Y"</span>],
+    <span class="code-string">"分销商"</span>: [<span class="code-string">"区域1"</span>, <span class="code-string">"区域2"</span>],
+    <span class="code-string">"零售商"</span>: [<span class="code-string">"门店A"</span>, <span class="code-string">"门店B"</span>]
+}
+
+<span class="code-function">print</span>(<span class="code-string">"供应链结构："</span>)
+<span class="code-function">print</span>(<span class="code-string">"="</span>*<span class="code-number">40</span>)
+<span class="code-keyword">for</span> node, items <span class="code-keyword">in</span> supply_chain.<span class="code-function">items</span>():
+    <span class="code-function">print</span>(<span class="code-string">f"{node}: {', '.join(items)}"</span>)
+
+<span class="code-comment"># 计算供应链长度</span>
+<span class="code-variable">chain_length</span> = <span class="code-function">len</span>(supply_chain)
+<span class="code-function">print</span>(<span class="code-string">f"\n供应链层级数：{chain_length}"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第2节：需求预测 -->
+        <div id="module-2" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">2</span>
+                    需求预测
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        需求预测是供应链管理的核心，通过历史数据预测未来需求。常用方法包括移动平均法、指数平滑法等。
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-2">移动平均法</div>
+                            <code class="text-blue-600">取最近N期平均值</code>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-2">指数平滑法</div>
+                            <code class="text-green-600">加权平均，近期权重高</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 需求预测 - 移动平均法</span>
+<span class="code-variable">sales_history</span> = [<span class="code-number">120</span>, <span class="code-number">135</span>, <span class="code-number">128</span>, <span class="code-number">142</span>, <span class="code-number">155</span>, <span class="code-number">148</span>]
+
+<span class="code-function">print</span>(<span class="code-string">"历史销售数据："</span>, sales_history)
+
+<span class="code-comment"># 3期移动平均</span>
+<span class="code-variable">n</span> = <span class="code-number">3</span>
+<span class="code-variable">ma_forecast</span> = <span class="code-function">sum</span>(sales_history[-n:]) / n
+<span class="code-function">print</span>(<span class="code-string">f"3期移动平均预测：{ma_forecast:.1f}"</span>)
+
+<span class="code-comment"># 简单指数平滑（alpha=0.3）</span>
+<span class="code-variable">alpha</span> = <span class="code-number">0.3</span>
+<span class="code-variable">es_forecast</span> = sales_history[<span class="code-number">0</span>]
+<span class="code-keyword">for</span> actual <span class="code-keyword">in</span> sales_history[<span class="code-number">1</span>:]:
+    es_forecast = alpha * actual + (<span class="code-number">1</span> - alpha) * es_forecast
+
+<span class="code-function">print</span>(<span class="code-string">f"指数平滑预测：{es_forecast:.1f}"</span>)
+
+<span class="code-comment"># 预测误差计算</span>
+<span class="code-variable">actual</span> = <span class="code-number">150</span>
+<span class="code-variable">error</span> = actual - ma_forecast
+<span class="code-function">print</span>(<span class="code-string">f"\n预测误差：{error:.1f}"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第3节：库存管理 -->
+        <div id="module-3" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">3</span>
+                    库存管理
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        库存管理是平衡供需的关键，需要确定最优的订货点和订货量。常用指标包括安全库存、再订货点、经济订货批量(EOQ)等。
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-3 mb-4">
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-1">安全库存</div>
+                            <code class="text-blue-600 text-sm">应对需求波动</code>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-1">再订货点</div>
+                            <code class="text-green-600 text-sm">触发补货的库存水平</code>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg">
+                            <div class="font-semibold text-purple-800 mb-1">EOQ</div>
+                            <code class="text-purple-600 text-sm">经济订货批量</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 库存管理计算</span>
+<span class="code-keyword">import</span> math
+
+<span class="code-comment"># 基本参数</span>
+<span class="code-variable">annual_demand</span> = <span class="code-number">1200</span>  <span class="code-comment"># 年需求量</span>
+<span class="code-variable">order_cost</span> = <span class="code-number">100</span>     <span class="code-comment"># 每次订货成本</span>
+<span class="code-variable">holding_cost</span> = <span class="code-number">5</span>       <span class="code-comment"># 单位年持有成本</span>
+<span class="code-variable">lead_time</span> = <span class="code-number">7</span>         <span class="code-comment"># 提前期（天）</span>
+<span class="code-variable">daily_demand</span> = annual_demand / <span class="code-number">365</span>
+
+<span class="code-comment"># 计算EOQ</span>
+<span class="code-variable">eoq</span> = math.<span class="code-function">sqrt</span>((<span class="code-number">2</span> * annual_demand * order_cost) / holding_cost)
+
+<span class="code-comment"># 计算再订货点</span>
+<span class="code-variable">reorder_point</span> = daily_demand * lead_time
+
+<span class="code-comment"># 计算安全库存（假设需求标准差为10）</span>
+<span class="code-variable">std_demand</span> = <span class="code-number">10</span>
+<span class="code-variable">service_level</span> = <span class="code-number">0.95</span>
+<span class="code-variable">z_score</span> = <span class="code-number">1.645</span>  <span class="code-comment"># 95%服务水平对应的Z值</span>
+<span class="code-variable">safety_stock</span> = z_score * std_demand * math.<span class="code-function">sqrt</span>(lead_time)
+
+<span class="code-function">print</span>(<span class="code-string">"库存管理分析："</span>)
+<span class="code-function">print</span>(<span class="code-string">="</span>*<span class="code-number">40</span>)
+<span class="code-function">print</span>(<span class="code-string">f"经济订货批量(EOQ)：{eoq:.0f}件"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"再订货点：{reorder_point:.0f}件"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"安全库存：{safety_stock:.0f}件"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"建议最高库存：{eoq + safety_stock:.0f}件"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第4节：物流优化 -->
+        <div id="module-4" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">4</span>
+                    物流优化
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        物流优化旨在降低运输成本、提高配送效率。常用方法包括路径优化、装载优化、配送中心选址等。
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-2">运输成本</div>
+                            <code class="text-blue-600">距离 × 单位成本 × 重量</code>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-2">装载率</div>
+                            <code class="text-green-600">实际装载量 / 最大装载量</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 物流成本计算与优化</span>
+<span class="code-comment"># 配送路线数据</span>
+<span class="code-variable">routes</span> = [
+    {<span class="code-string">"路线"</span>: <span class="code-string">"A"</span>, <span class="code-string">"距离"</span>: <span class="code-number">100</span>, <span class="code-string">"重量"</span>: <span class="code-number">500</span>, <span class="code-string">"成本系数"</span>: <span class="code-number">0.5</span>},
+    {<span class="code-string">"路线"</span>: <span class="code-string">"B"</span>, <span class="code-string">"距离"</span>: <span class="code-number">150</span>, <span class="code-string">"重量"</span>: <span class="code-number">800</span>, <span class="code-string">"成本系数"</span>: <span class="code-number">0.5</span>},
+    {<span class="code-string">"路线"</span>: <span class="code-string">"C"</span>, <span class="code-string">"距离"</span>: <span class="code-number">80</span>, <span class="code-string">"重量"</span>: <span class="code-number">300</span>, <span class="code-string">"成本系数"</span>: <span class="code-number">0.5</span>}
+]
+
+<span class="code-function">print</span>(<span class="code-string">"物流成本分析："</span>)
+<span class="code-function">print</span>(<span class="code-string">="</span>*<span class="code-number">50</span>)
+
+<span class="code-variable">total_cost</span> = <span class="code-number">0</span>
+<span class="code-keyword">for</span> route <span class="code-keyword">in</span> routes:
+    cost = route[<span class="code-string">"距离"</span>] * route[<span class="code-string">"重量"</span>] * route[<span class="code-string">"成本系数"</span>] / <span class="code-number">1000</span>
+    total_cost += cost
+    <span class="code-function">print</span>(<span class="code-string">f"路线{route['路线']}: {route['距离']}km, {route['重量']}kg, 成本¥{cost:.2f}"</span>)
+
+<span class="code-function">print</span>(<span class="code-string">="</span>*<span class="code-number">50</span>)
+<span class="code-function">print</span>(<span class="code-string">f"总运输成本：¥{total_cost:.2f}"</span>)
+
+<span class="code-comment"># 装载率计算</span>
+<span class="code-variable">vehicle_capacity</span> = <span class="code-number">1000</span>  <span class="code-comment"># 车辆载重kg</span>
+<span class="code-variable">total_weight</span> = <span class="code-function">sum</span>(r[<span class="code-string">"重量"</span>] <span class="code-keyword">for</span> r <span class="code-keyword">in</span> routes)
+<span class="code-variable">load_rate</span> = (total_weight / vehicle_capacity) * <span class="code-number">100</span>
+
+<span class="code-function">print</span>(<span class="code-string">f"\n车辆装载率：{load_rate:.1f}%"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"装载状态：{'合理' if load_rate <= 100 else '超载'}"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第5节：供应商评估 -->
+        <div id="module-5" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">5</span>
+                    供应商评估
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        供应商评估是选择和管理供应商的重要环节，常用指标包括质量、价格、交货期、服务等。常用方法有层次分析法(AHP)、加权评分法等。
+                    </p>
+                    <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                        <div class="font-semibold text-purple-800 mb-2">评估指标权重示例</div>
+                        <code class="text-purple-600">质量(40%) + 价格(30%) + 交货(20%) + 服务(10%)</code>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 供应商评估 - 加权评分法</span>
+<span class="code-variable">suppliers</span> = [
+    {<span class="code-string">"名称"</span>: <span class="code-string">"供应商A"</span>, <span class="code-string">"质量"</span>: <span class="code-number">90</span>, <span class="code-string">"价格"</span>: <span class="code-number">85</span>, <span class="code-string">"交货"</span>: <span class="code-number">80</span>, <span class="code-string">"服务"</span>: <span class="code-number">88</span>},
+    {<span class="code-string">"名称"</span>: <span class="code-string">"供应商B"</span>, <span class="code-string">"质量"</span>: <span class="code-number">85</span>, <span class="code-string">"价格"</span>: <span class="code-number">95</span>, <span class="code-string">"交货"</span>: <span class="code-number">85</span>, <span class="code-string">"服务"</span>: <span class="code-number">82</span>},
+    {<span class="code-string">"名称"</span>: <span class="code-string">"供应商C"</span>, <span class="code-string">"质量"</span>: <span class="code-number">88</span>, <span class="code-string">"价格"</span>: <span class="code-number">80</span>, <span class="code-string">"交货"</span>: <span class="code-number">90</span>, <span class="code-string">"服务"</span>: <span class="code-number">85</span>}
+]
+
+<span class="code-comment"># 权重设置</span>
+<span class="code-variable">weights</span> = {<span class="code-string">"质量"</span>: <span class="code-number">0.4</span>, <span class="code-string">"价格"</span>: <span class="code-number">0.3</span>, <span class="code-string">"交货"</span>: <span class="code-number">0.2</span>, <span class="code-string">"服务"</span>: <span class="code-number">0.1</span>}
+
+<span class="code-function">print</span>(<span class="code-string">"供应商评估结果："</span>)
+<span class="code-function">print</span>(<span class="code-string">="</span>*<span class="code-number">50</span>)
+<span class="code-function">print</span>(<span class="code-string">f"{'供应商':<10} {'质量':<8} {'价格':<8} {'交货':<8} {'服务':<8} {'综合得分':<10}"</span>)
+<span class="code-function">print</span>(<span class="code-string">-"</span>*<span class="code-number">50</span>)
+
+<span class="code-variable">scores</span> = []
+<span class="code-keyword">for</span> s <span class="code-keyword">in</span> suppliers:
+    score = (s[<span class="code-string">"质量"</span>] * weights[<span class="code-string">"质量"</span>] + 
+             s[<span class="code-string">"价格"</span>] * weights[<span class="code-string">"价格"</span>] + 
+             s[<span class="code-string">"交货"</span>] * weights[<span class="code-string">"交货"</span>] + 
+             s[<span class="code-string">"服务"</span>] * weights[<span class="code-string">"服务"</span>])
+    scores.<span class="code-function">append</span>((s[<span class="code-string">"名称"</span>], score, s))
+    <span class="code-function">print</span>(<span class="code-string">f"{s['名称']:<10} {s['质量']:<8} {s['价格']:<8} {s['交货']:<8} {s['服务']:<8} {score:.2f}"</span>)
+
+<span class="code-comment"># 排序并选择最佳供应商</span>
+scores.<span class="code-function">sort</span>(key=<span class="code-keyword">lambda</span> x: x[<span class="code-number">1</span>], reverse=<span class="code-keyword">True</span>)
+<span class="code-function">print</span>(<span class="code-string">="</span>*<span class="code-number">50</span>)
+<span class="code-function">print</span>(<span class="code-string">f"\n推荐供应商：{scores[0][0]} (得分: {scores[0][1]:.2f})"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第6节：成本分析 -->
+        <div id="module-6" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">6</span>
+                    成本分析
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        供应链成本分析包括采购成本、库存成本、运输成本、管理成本等。通过成本分析可以识别优化机会，提高供应链效率。
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-3 mb-4">
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-1">总成本</div>
+                            <code class="text-blue-600 text-sm">采购+库存+运输+管理</code>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-1">成本结构</div>
+                            <code class="text-green-600 text-sm">各成本占比分析</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 供应链成本分析</span>
+<span class="code-variable">costs</span> = {
+    <span class="code-string">"采购成本"</span>: <span class="code-number">500000</span>,
+    <span class="code-string">"库存成本"</span>: <span class="code-number">120000</span>,
+    <span class="code-string">"运输成本"</span>: <span class="code-number">80000</span>,
+    <span class="code-string">"管理成本"</span>: <span class="code-number">50000</span>,
+    <span class="code-string">"其他成本"</span>: <span class="code-number">30000</span>
+}
+
+<span class="code-function">print</span>(<span class="code-string">"供应链成本分析："</span>)
+<span class="code-function">print</span>(<span class="code-string">="</span>*<span class="code-number">50</span>)
+
+<span class="code-variable">total_cost</span> = <span class="code-function">sum</span>(costs.<span class="code-function">values</span>())
+
+<span class="code-keyword">for</span> category, cost <span class="code-keyword">in</span> costs.<span class="code-function">items</span>():
+    percentage = (cost / total_cost) * <span class="code-number">100</span>
+    bar = <span class="code-string">"█"</span> * <span class="code-function">int</span>(percentage / <span class="code-number">5</span>)
+    <span class="code-function">print</span>(<span class="code-string">f"{category:<10}: ¥{cost:>8,} ({percentage:>5.1f}%) {bar}"</span>)
+
+<span class="code-function">print</span>(<span class="code-string">="</span>*<span class="code-number">50</span>)
+<span class="code-function">print</span>(<span class="code-string">f"总成本：¥{total_cost:,}"</span>)
+
+<span class="code-comment"># 成本优化建议</span>
+<span class="code-function">print</span>(<span class="code-string">"\n成本优化建议："</span>)
+<span class="code-variable">max_cost_category</span> = <span class="code-function">max</span>(costs, key=costs.<span class="code-function">get</span>)
+<span class="code-function">print</span>(<span class="code-string">f"1. {max_cost_category}占比最高({(costs[max_cost_category]/total_cost*100):.1f}%)，建议优先优化"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"2. 库存成本可通过提高周转率降低"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"3. 运输成本可通过路线优化和装载率提升来降低"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第7节：绩效评估 -->
+        <div id="module-7" class="module-content hidden">
+            <div class="knowledge-card">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">7</span>
+                    绩效评估
+                </h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-2">📖 知识点讲解</h4>
+                    <p class="text-gray-600 mb-4">
+                        供应链绩效评估通过关键绩效指标(KPI)衡量供应链运营效果。常用KPI包括订单满足率、库存周转率、准时交付率、供应链总成本等。
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-3 mb-4">
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <div class="font-semibold text-blue-800 mb-1">订单满足率</div>
+                            <code class="text-blue-600 text-sm">满足订单数/总订单数</code>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg">
+                            <div class="font-semibold text-green-800 mb-1">库存周转率</div>
+                            <code class="text-green-600 text-sm">销售成本/平均库存</code>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg">
+                            <div class="font-semibold text-purple-800 mb-1">准时交付率</div>
+                            <code class="text-purple-600 text-sm">准时交付数/总交付数</code>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg">
+                            <div class="font-semibold text-orange-800 mb-1">供应链周期</div>
+                            <code class="text-orange-600 text-sm">从采购到交付的时间</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💻 代码示例</h4>
+                    <div class="code-block text-green-400">
+<span class="code-comment"># 供应链KPI计算</span>
+<span class="code-variable">kpi_data</span> = {
+    <span class="code-string">"总订单数"</span>: <span class="code-number">1000</span>,
+    <span class="code-string">"满足订单数"</span>: <span class="code-number">950</span>,
+    <span class="code-string">"准时交付数"</span>: <span class="code-number">920</span>,
+    <span class="code-string">"销售成本"</span>: <span class="code-number">5000000</span>,
+    <span class="code-string">"平均库存"</span>: <span class="code-number">500000</span>,
+    <span class="code-string">"供应链周期(天)"</span>: <span class="code-number">15</span>
+}
+
+<span class="code-function">print</span>(<span class="code-string">"供应链KPI评估："</span>)
+<span class="code-function">print</span>(<span class="code-string">="</span>*<span class="code-number">50</span>)
+
+<span class="code-comment"># 计算各项指标</span>
+<span class="code-variable">order_fulfillment</span> = (kpi_data[<span class="code-string">"满足订单数"</span>] / kpi_data[<span class="code-string">"总订单数"</span>]) * <span class="code-number">100</span>
+<span class="code-variable">on_time_delivery</span> = (kpi_data[<span class="code-string">"准时交付数"</span>] / kpi_data[<span class="code-string">"总订单数"</span>]) * <span class="code-number">100</span>
+<span class="code-variable">inventory_turnover</span> = kpi_data[<span class="code-string">"销售成本"</span>] / kpi_data[<span class="code-string">"平均库存"</span>]
+
+<span class="code-function">print</span>(<span class="code-string">f"订单满足率：{order_fulfillment:.1f}% {'✓ 优秀' if order_fulfillment >= 95 else '⚠ 需改进'}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"准时交付率：{on_time_delivery:.1f}% {'✓ 优秀' if on_time_delivery >= 90 else '⚠ 需改进'}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"库存周转率：{inventory_turnover:.1f}次/年 {'✓ 优秀' if inventory_turnover >= 8 else '⚠ 需改进'}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"供应链周期：{kpi_data['供应链周期(天)']}天 {'✓ 优秀' if kpi_data['供应链周期(天)'] <= 14 else '⚠ 需改进'}"</span>)
+
+<span class="code-comment"># 综合评分</span>
+<span class="code-variable">score</span> = (<span class="code-function">min</span>(order_fulfillment/<span class="code-number">100</span>, <span class="code-number">1</span>) * <span class="code-number">0.3</span> + 
+         <span class="code-function">min</span>(on_time_delivery/<span class="code-number">100</span>, <span class="code-number">1</span>) * <span class="code-number">0.3</span> + 
+         <span class="code-function">min</span>(inventory_turnover/<span class="code-number">10</span>, <span class="code-number">1</span>) * <span class="code-number">0.2</span> + 
+         (<span class="code-number">1</span> - <span class="code-function">min</span>(kpi_data[<span class="code-string">"供应链周期(天)"</span>]/<span class="code-number">30</span>, <span class="code-number">1</span>)) * <span class="code-number">0.2</span>) * <span class="code-number">100</span>
+
+<span class="code-function">print</span>(<span class="code-string">="</span>*<span class="code-number">50</span>)
+<span class="code-function">print</span>(<span class="code-string">f"综合绩效评分：{score:.1f}/100"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"评级：{'A级-卓越' if score >= 90 else ('B级-良好' if score >= 80 else 'C级-待改进')}"</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 综合代码编辑器 -->
+        <div class="mt-12 bg-white rounded-2xl shadow-xl p-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+                    <span class="text-3xl mr-3">🚀</span>
+                    综合代码编辑器
+                </h2>
+                <button onclick="runAllCode()" class="bg-gradient-to-r from-primary to-amber-600 text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity flex items-center">
+                    <i class="fa fa-play mr-2"></i>
+                    运行全部代码
+                </button>
+            </div>
+            
+            <p class="text-gray-600 mb-4">
+                将上面示例中的代码复制到下方编辑器中，点击"运行全部代码"查看结果：
+            </p>
+            
+            <div class="mb-4">
+                <div id="main-editor" class="rounded-lg overflow-hidden border-2 border-gray-200" style="height: 400px;"></div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold text-gray-700 mb-3 flex items-center">
+                    <span class="mr-2">📤</span> 运行结果
+                </h3>
+                <div id="output-area" class="output-box">
+                    <p class="text-gray-400 text-center">点击"运行全部代码"按钮查看输出结果</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-gray-400">© 2026 郑利娜 - 广东科学技术职业学院 · 商务数据分析与应用专业</p>
+        </div>
+    </footer>
+
+    <script>
+        // 初始化主编辑器
+        const editor = ace.edit("main-editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/python");
+        editor.setFontSize(14);
+        editor.setShowPrintMargin(false);
+
+        // 默认代码
+        editor.setValue(`# 供应链数据分析 - 综合练习
+# 在下方编写你的代码，点击"运行全部代码"执行
+
+# 示例：供应链节点
+supply_chain = {
+    "供应商": ["原材料A", "原材料B"],
+    "制造商": ["产品X", "产品Y"],
+    "分销商": ["区域1", "区域2"],
+    "零售商": ["门店A", "门店B"]
+}
+
+print("供应链结构：")
+for node, items in supply_chain.items():
+    print(f"{node}: {', '.join(items)}")
+
+# 示例：需求预测
+sales = [120, 135, 128, 142, 155, 148]
+forecast = sum(sales[-3:]) / 3
+print(f"\\n3期移动平均预测：{forecast:.1f}")
+
+# 示例：库存计算
+annual_demand = 1200
+order_cost = 100
+holding_cost = 5
+eoq = ((2 * annual_demand * order_cost) / holding_cost) ** 0.5
+print(f"\\n经济订货批量(EOQ)：{eoq:.0f}件")
+`, -1);
+
+        // 显示指定模块
+        function showModule(num) {
+            document.querySelectorAll('.module-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            const module = document.getElementById(`module-${num}`);
+            if (module) {
+                module.classList.remove('hidden');
+                module.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // 运行代码
+        function runAllCode() {
+            const code = editor.getValue();
+            const outputArea = document.getElementById('output-area');
+            
+            outputArea.innerHTML = '<p class="text-primary"><i class="fa fa-spinner fa-spin mr-2"></i>正在运行...</p>';
+            
+            try {
+                const outputs = [];
+                
+                const originalLog = console.log;
+                console.log = function(...args) {
+                    outputs.push(args.map(arg => {
+                        if (typeof arg === 'object') {
+                            return JSON.stringify(arg);
+                        }
+                        return String(arg);
+                    }).join(' '));
+                };
+                
+                eval(code);
+                
+                console.log = originalLog;
+                
+                if (outputs.length > 0) {
+                    outputArea.innerHTML = `
+                        <div class="space-y-2">
+                            ${outputs.map(line => `
+                                <div class="bg-white p-3 rounded-lg border border-gray-200 font-mono text-sm">
+                                    <span class="text-gray-500 mr-2">></span>${line}
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                } else {
+                    outputArea.innerHTML = '<p class="text-green-600"><i class="fa fa-check-circle mr-2"></i>代码执行成功（无输出）</p>';
+                }
+            } catch (error) {
+                outputArea.innerHTML = `
+                    <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                        <p class="text-red-600 font-semibold mb-2"><i class="fa fa-times-circle mr-2"></i>运行错误</p>
+                        <p class="text-red-500 font-mono text-sm">${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        showModule(1);
+    </script>
+</body>
+</html>
